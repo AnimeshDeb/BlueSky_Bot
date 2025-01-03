@@ -37,25 +37,36 @@ await page.type('[data-testid="handleInput"]', `${username}`, {delay: 120} )
 
 await page.waitForSelector('[data-testid="nextBtn"]')
 await page.click('[data-testid="nextBtn"]')
-try{
-  await page.waitForSelector('.css-146c3p1', {timeout:5000} )
-  await page.screenshot({
-    path:"./ss.png",
-  })
- 
-  const imagepath='.ss.png'
-  Tesseract.recognize(
-    imagepath,
-    'eng',
-    {logger:m=>console.log(m)}
-  )
-  .then(({data:{text}})=>{
-    console.log(text)
-  });
-}
-catch(error){
 
-}
+await page.waitForSelector('.css-146c3p1', {timeout:5000} )
+
+ 
+ 
+await setTimeout(function takess(){
+  page.screenshot({
+    path:"./img/ss.png",})
+    console.log("ss taken")
+  }, 1000)
+
+
+  const imagepath='./img/ss.png'
+await setTimeout(async function scan(){
+  const worker=await createWorker('eng')
+  const ret=await worker.recognize(imagepath)
+  const textOutput=ret.data.text
+  if (textOutput.includes("That handle is already taken."))
+  {
+    console.log("Handle is already taken, please choose a new one.")
+  }
+  
+  await worker.terminate()}, 1000
+)
+
+
+ 
+
+
+
 
 
 
