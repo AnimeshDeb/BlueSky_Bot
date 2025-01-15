@@ -1,18 +1,22 @@
 import '../styles/home.css';
-
+import {useNavigate} from 'react-router-dom'
 function SignIn() {
+const navigate=useNavigate();
+  const navigatePage=()=>{
+    navigate('/login')
+  }
   return (
-    <div className='container'>
+    <div className='contain7er'>
         <div className='home-left'>
 PLACE HOLDER TEXT
         </div>
       <div className='home'>
-        <button className='btn'>Login with existing Bluesky credentials</button>
-        <button className='btn'>Need to make a new Bluesky account</button>
+        <button className='btn' onClick={navigatePage} >Login</button>
+        <button className='btn'>Signup</button>
       </div>
-      <div className='home-right'>
+      {/* <div className='home-right'>
 PLACEHOLDER TEXT
-      </div>
+      </div> */}
     </div>
   );
 }
