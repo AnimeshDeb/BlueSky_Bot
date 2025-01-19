@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PasswordMatch from '../Components/passwordmatch';
-import axios from 'axios';
+
 function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -25,20 +25,17 @@ function Signup() {
     }
     if (password === confirmPassword) {
       setVisible(false);
-      axios
-        .post('http://localhost:3000/signup', {
-          email: email,
-          password: password,
-        })
-        .then((response) => {
-          console.log('Response data:', response.data);
-          // You can now log the individual properties if needed:
-          console.log('Email:', response.data.email);
-          console.log('Password:', response.data.password);
-        })
-        .catch((error) => {
-          console.log('ERROR: ', error);
-        });
+      fetch('http://localhost:3000/signup',{
+        method: 'POST',
+        headers:{
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({email:email, password:password}),
+
+      })
+      .then((response)=>{return response.json()})//expecting json data
+      .then((data)=>console.log(data))
+      .catch((error)=>console.error('ERROR: ', error))
     }
   };
 

@@ -1,5 +1,5 @@
 import express from 'express'
-import signup from './Endpoints/authEndpt.js'
+import authEndpt from './Endpoints/authEndpt.js'
 import cors from 'cors'
 const app=express()
 app.use(cors({
@@ -7,18 +7,11 @@ app.use(cors({
 }))
 app.use(express.json())
 app.get('/',(req,res)=>{
-  console.log("WORKING BACKEND")
+  res.send("Backend working")
 })
-app.use('/signup',signup)
+app.use('/signup',authEndpt)
 
 
 app.listen(3000,()=>{
   console.log('Server running on port 3000')
 })
-
-// app.get('/',(req,res)=>{
-//   console.log('BACKEND WORKING')
-// })
-// app.listen(3000,()=>{
-//   console.log('Server running on port 3000')
-// })
