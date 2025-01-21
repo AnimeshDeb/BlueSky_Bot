@@ -5,7 +5,8 @@ To create a Bluesky social media bot that can allow users to:
 - Create an account
 - Post content automatically and regularly to the platform
 
-### Current Status (1/19/2025)
-- Fixed bugs relating to api calls from client to server. Now client can make a call to /signup successfully. I also finished refactoring the endpoints in the server. 
+### Current Status (1/21/2025)
+- Added password requirments and finished password verification. 
+- Now when user signs up successfully, their information gets stored into the database (email and hashed password).
 
 
