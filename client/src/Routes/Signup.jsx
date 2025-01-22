@@ -1,12 +1,17 @@
 import { useState } from 'react';
 import PasswordMatch from '../Components/passwordmatch';
 import PasswordRequirements from '../Components/passwordRequirements';
+import EmailExists from '../Components/emailAlreadyExists';
+import { useNavigate } from 'react-router-dom';
 function Signup() {
+  const navigate=useNavigate()
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [visible, setVisible] = useState(false);
   const [passRequirementsVisible, setPassRequirmentsVisible ]=useState(false)
+  const [emailValidVisible, setEmailValidVisible]=useState(false)
+  // const [isLogged, setIsLogged]=useState(false)
   let passwordValid=true
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -38,6 +43,7 @@ function Signup() {
         passwordValid=true
         setPassRequirmentsVisible(false)
       }
+      
   
        if (password === confirmPassword && passwordValid===true) {
         setVisible(false);
@@ -50,7 +56,18 @@ function Signup() {
           body: JSON.stringify({ email: email, password: password }),
         })
           const data=await response.json()
-          console.log("data is: ", data)
+          if(data.data==="NULL")
+          {
+            setEmailValidVisible(true)
+          }else if (data.data==="OK")
+            {
+              setEmailValidVisible(false)
+              // setIsLogged(true)
+              navigate('/home', {state: {isLogged: true} })
+
+            }
+        
+          
       }
     }
     catch(error){
@@ -85,6 +102,7 @@ function Signup() {
         <button onClick={handleSubmit}>Signup</button>
         {passRequirementsVisible &&<PasswordRequirements/>}
         {visible && <PasswordMatch />}
+        {emailValidVisible && <EmailExists/>}
       </div>
     </div>
   );

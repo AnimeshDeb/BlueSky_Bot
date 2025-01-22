@@ -1,27 +1,14 @@
-import '../styles/home.css';
-import {useNavigate} from 'react-router-dom'
-function SignIn() {
-const navigate=useNavigate();
-  const navigateLogin=()=>{
-    navigate('/login')
-  }
-  const navigateSignup=()=>{
-    navigate('signup')
-  }
-  return (
-    <div className='contain7er'>
-        <div className='home-left'>
-PLACE HOLDER TEXT
-        </div>
-      <div className='home'>
-        <button className='btn' onClick={navigateLogin} >Login</button>
-        <button className='btn' onClick={navigateSignup}>Signup</button>
-      </div>
-      {/* <div className='home-right'>
-PLACEHOLDER TEXT
-      </div> */}
-    </div>
-  );
-}
 
-export default SignIn;
+import { useLocation } from "react-router-dom";
+function Home(){
+    const location=useLocation();
+    const isLogged=location.state?.isLogged
+    console.log("isLogged:  ", isLogged)
+    return(
+        <div>
+
+            Home page
+        </div>
+    )
+}
+export default Home;
