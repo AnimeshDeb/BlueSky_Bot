@@ -2,6 +2,7 @@ import '../styles/login.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PasswordIncorrect from '../Components/passwordIncorrect';
+import Cookies from 'js-cookie'
 function Login()  {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('')
@@ -27,14 +28,15 @@ function Login()  {
           'Content-Type':'application/json',
 
         },
-        body:JSON.stringify({email:email, password:password})
+        body:JSON.stringify({email:email, password:password}),
+        credentials:'include',//ensures cookies are sent with requests
       })
       const data=await response.json()
-      console.log("data is",data.data)
+      console.log("general data is ", data)
+      console.log(Cookies.get('AuthToken'))
       if (data.data===true)
       {
         setPasswordIncorrect(false)
-        console.log('value of passwordincorrect ', passwordIncorrect)
         navigate('/home')
         
       }

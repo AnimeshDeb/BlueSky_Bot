@@ -1,10 +1,8 @@
-import  '../componentStyles/passwordmatch.css'
-function PasswordMatch(){
-    return(
-        <>
-        Passwords Do Not Match!
-        </>
-    )
+import '../componentStyles/passwordmatch.css';
+function PasswordMatch() {
+  return (
+  <div>Passwords Do Not Match!</div>
+  )
 }
 
-export default PasswordMatch
+export default PasswordMatch;
