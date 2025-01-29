@@ -3,6 +3,7 @@ import signup from './Endpoints/signup.js'
 import cors from 'cors'
 import login from './Endpoints/login.js'
 import cookieParser from 'cookie-parser'
+import confirmToken from './Endpoints/confirmToken.js'
 const app=express()
 
 app.use(cors({
@@ -18,6 +19,7 @@ app.get('/',(req,res)=>{
 
 app.use('/signup',signup)
 app.use('/login', login)
+app.use('/confirmToken', confirmToken)
 
 
 app.listen(3000,()=>{

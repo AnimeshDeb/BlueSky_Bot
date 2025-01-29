@@ -12,8 +12,6 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/home" element={<Routeguard><Home /> </Routeguard>} />
-      
-      {/* <Route path="/home" element={<Home />} /> */}
     </Routes>
   );
 }

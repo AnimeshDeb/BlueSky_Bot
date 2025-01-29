@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
         const token=jwt.sign({_id: user._id, email: email}, process.env.SECRET_TOKEN)//jwt.sign({data1: .. , data2:..,etc}, secretkey), generating a specific token for a specific user
         //passing token back to frontend so that subsequent calls to backend can include token for authorization
         res.cookie('AuthToken', token, {
-          httpOnly:false,//prevent access to cookie via js, prevents clientside js from accessing cookie if set to true
+          httpOnly:true,//prevent access to cookie via js, prevents clientside js from accessing cookie if set to true
           secure: process.env.NODE_ENV==='production', //only send cookie over https in production
           sameSite: 'Strict',
           maxAge: 3600000 //cookie exp 1ht
@@ -44,7 +44,5 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.get('/',verify, (req,res)=>{
-  
-})
+
 export default router;

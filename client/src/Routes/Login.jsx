@@ -2,7 +2,7 @@ import '../styles/login.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PasswordIncorrect from '../Components/passwordIncorrect';
-import Cookies from 'js-cookie'
+// import Cookies from 'js-cookie'
 function Login()  {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('')
@@ -22,7 +22,7 @@ function Login()  {
   const handleSubmit = async() => {
     try{
   
-      const response=await fetch('http://localhost:3000/login',{
+      await fetch('http://localhost:3000/login',{
         method:'POST',
         headers:{
           'Content-Type':'application/json',
@@ -31,14 +31,16 @@ function Login()  {
         body:JSON.stringify({email:email, password:password}),
         credentials:'include',//ensures cookies are sent with requests
       })
-      const data=await response.json()
-      console.log("general data is ", data)
-      console.log(Cookies.get('AuthToken'))
-      if (data.data===true)
+
+      const responseConfirm=await fetch('http://localhost:3000/confirmToken',{
+        credentials:'include',
+      })
+      const dataConfirm=await responseConfirm.json()
+      console.log("dataconfirm data: ", dataConfirm)
+      if(dataConfirm.authenticated)
       {
         setPasswordIncorrect(false)
         navigate('/home')
-        
       }
       else setPasswordIncorrect(true)
 
