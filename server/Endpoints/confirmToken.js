@@ -10,7 +10,7 @@ router.get('/',async(req,res)=>{
             return res.json({authenticated:false})
         }
     try{
-        const verified=jwt.verify(token, process.env.SECRET_TOKEN)
+        const verified=await jwt.verify(token, process.env.SECRET_TOKEN)
         return res.json({authenticated:true})
     }
     catch(error)

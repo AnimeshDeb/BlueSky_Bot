@@ -4,6 +4,8 @@ import cors from 'cors'
 import login from './Endpoints/login.js'
 import cookieParser from 'cookie-parser'
 import confirmToken from './Endpoints/confirmToken.js'
+import makePost from './Endpoints/makePost.js'
+
 const app=express()
 
 app.use(cors({
@@ -20,6 +22,7 @@ app.get('/',(req,res)=>{
 app.use('/signup',signup)
 app.use('/login', login)
 app.use('/confirmToken', confirmToken)
+app.use('/makePost', makePost)
 
 
 app.listen(3000,()=>{

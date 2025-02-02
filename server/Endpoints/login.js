@@ -12,6 +12,7 @@ router.post('/', async (req, res) => {
   try {
     const connection = await mongoose.connect(process.env.CONNECTION_STRING);
     const { email, password } = req.body;
+    
     const hashedPassword = await AuthenticationModel.findOne({
       email: email,
     }).select('password');

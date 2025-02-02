@@ -3,7 +3,7 @@ function PasswordIncorrect(){
     return(
         <div className='passwordInfo'>
 
-            Password Not Correct
+             password incorrect!
         </div>
     )
 }
