@@ -1,4 +1,4 @@
-import '../styles/home.css';
+import '../styles/landing.css';
 import {useNavigate} from 'react-router-dom'
 function Landing() {
 const navigate=useNavigate();
