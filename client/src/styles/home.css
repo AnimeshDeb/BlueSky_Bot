@@ -1,53 +1,21 @@
-.container{
-    display:flex;
-}
-.bluesky_header{
+/* Ensure home-container stacks its children (homecomponent and button) in a column */
+.home-container {
     display: flex;
-   
-}
-.information{
-    display:flex;
-    flex-direction: column;
+    flex-direction: column; /* Stack homecomponent and button */
+    align-items: center; /* Center contents horizontally */
+    width: 100%;
     gap:50px;
-    width:700px;
-    justify-content: flex-start;
-    align-items: flex-start;
-    /* background-color: aqua;  */
-}
-.information_sub{
-    margin:10px;
-    display:flex;
-    gap:50px;
-    
-   
 }
 
-.text{
-    width:700px;
-    height:365px;
-    display:flex;
-    
-    
-    
-    
-
-}
-.text_input{
-    flex-grow: 1;
+/* Ensure homecomponent stays in row layout */
+.homecomponent {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center; /* Center contents inside */
+    width: 100%; /* Ensure it doesn't shrink */
 }
 
- textarea{
-    background-color: white;
-    border: 3px solid black;
-    border-radius: 10px;
-    color:black;
-}
-input{
-    background-color: white;
-    border-radius: 7px;
-    color: black;
-}
-input:focus, textarea:focus {
-    outline: none;
-
+/* Optional: Adjust button */
+button {
+    margin-top: 20px; /* Add spacing between homecomponent and button */
 }

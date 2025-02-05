@@ -7,15 +7,16 @@ const router=express.Router()
 router.post('/',verify,async(req,res)=>{
     try{
         
-    const {text,date,username,password }=req.body
-    
+    const {text,username, password, calendar, time }=req.body
+    console.log("req,", text)
 
     const connection=await mongoose.connect(process.env.CONNECTION_STRING)
     const PostInformation=await PostModel.create({
-        post: text,
-        email: req.user.email,
+        email:req.user.email,
+        post:{text:text,username:username, password:password, calendar:calendar,time:time}
 
     })
+    console.log(PostInformation)
     console.log("Post created successfully")
 
 
@@ -33,8 +34,8 @@ router.post('/',verify,async(req,res)=>{
     // //works so far
     
 
-    
-    return res.json({text:text, date:date, username:username,password:password})
+    mongoose.disconnect()
+    return res.json({text:text, username:username, password:password,calendar:calendar, time:time})
     }
     catch(error)
     {

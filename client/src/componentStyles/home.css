@@ -1,0 +1,64 @@
+.container{
+    display:flex;
+}
+.bluesky_header{
+    display: flex;
+   
+}
+.information{
+    display:flex;
+    flex-direction: column;
+    gap:50px;
+    width:700px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    /* background-color: aqua;  */
+}
+.information_sub{
+    margin:10px;
+    display:flex;
+    gap:50px;
+    
+   
+}
+
+.text{
+    width:700px;
+    height:365px;
+    display:flex;
+
+}
+.text_input{
+    flex-grow: 1;
+    max-height: 400px;
+}
+
+ textarea{
+    background-color: white;
+    border: 3px solid black;
+    border-radius: 10px;
+    color:black;
+}
+input{
+    background-color: white;
+    border-radius: 7px;
+    color: black;
+}
+input:focus, textarea:focus {
+    outline: none;
+
+}
+
+.time{
+    
+display:flex;
+flex-direction: column;
+gap:20px;
+}
+
+.text_input::placeholder{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color:gray;
+}
