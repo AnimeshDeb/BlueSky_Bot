@@ -33,7 +33,7 @@ function Home() {
       </div>
       <div>
         <div>{renderMessage()}</div>
-        <button onClick={handleClick} disabled={renderSwitch===4}>Add Another Post</button>
+        <button onClick={handleClick} disabled={renderSwitch===4}>Add A Post</button>
       </div>
     </div>
   );

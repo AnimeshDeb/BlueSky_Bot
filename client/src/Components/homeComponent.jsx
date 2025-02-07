@@ -15,6 +15,8 @@ function HomeComponent() {
   const [isVisible, setIsVisible] = useState(false);
   const [isEditVisible, setIsEditVisible] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
+  const [isContainerVisible, setContainerVisible]=useState(true)
+  
   const handleChangeText = (event) => {
     setText(event.target.value);
     console.log(text);
@@ -49,11 +51,16 @@ function HomeComponent() {
   const handleEditClick = () => {
     setIsDisabled(false);
     setIsEditVisible(false);
-  };
+  }
+
+  const handleDeleteClick=()=>{
+    setContainerVisible(false)
+  }
   const handleSubmit = async () => {
     setIsVisible(true);
     setIsEditVisible(true);
     setIsDisabled(true);
+    setContainerVisible(true);
     //another method of convertng time state vs useEffect as above:
     //can't directly format the clock and time states as they are initialized to moment() (can't do setClockTime(newValue.format("h:mm A"))), so we do:
     const formmattedTime = clockTime.format('h:mm A');
@@ -78,69 +85,81 @@ function HomeComponent() {
   };
 
   return (
-    <div className="container">
-      <div className="information">
-        <div className="information_sub">
-          <div className="bluesky_header">Bluesky Credentials:</div>
-          <input
-            disabled={isDisabled}
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={handleChangeUsername}
-          />
-          <input
-            type="text"
-            disabled={isDisabled}
-            placeholder="Password"
-            value={password}
-            onChange={handleChangePassword}
-          />
-        </div>
-        <div className="text">
-          <textarea
-            type="text"
-            disabled={isDisabled}
-            placeholder="Text"
-            className="text_input"
-            value={text}
-            onChange={handleChangeText}
-          ></textarea>
-        </div>
-      </div>
-      <div className="time">
-        <div className="calander">
-          <DateCalendar
-            disabled={isDisabled}
-            value={calDate}
-            onChange={handleChangeCal}
-            views={['year', 'month', 'day']}
-            shouldDisableDate={(date) => date.isBefore(moment(), 'day')}
-          />
-        </div>
-        <div className="clock">
-          <TimePicker
-            value={clockTime}
-            disabled={isDisabled}
-            onChange={handleChangeClock}
-            label="Choose a time"
-          />
-        </div>
-        <button onClick={handleSubmit}> Schedule Post</button>
-      </div>
-      <div className="btncontainer">
-        {isVisible && (
-          <div className="delete">
-            <button>Delete</button>
+    
+    <div>
+
+      {isContainerVisible ? (
+        <div className="container">
+    
+        <div className="information">
+          <div className="information_sub">
+            <div className="bluesky_header">Bluesky Credentials:</div>
+            <input
+              disabled={isDisabled}
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={handleChangeUsername}
+            />
+            <input
+              type="text"
+              disabled={isDisabled}
+              placeholder="Password"
+              value={password}
+              onChange={handleChangePassword}
+            />
           </div>
-        )}
-        {isEditVisible && (
-          <div className="delete">
-            <button onClick={handleEditClick}>Edit</button>
+          <div className="text">
+            <textarea
+              type="text"
+              disabled={isDisabled}
+              placeholder="Text"
+              className="text_input"
+              value={text}
+              onChange={handleChangeText}
+            ></textarea>
           </div>
-        )}
+        </div>
+        <div className="time">
+          <div className="calander">
+            <DateCalendar
+              disabled={isDisabled}
+              value={calDate}
+              onChange={handleChangeCal}
+              views={['year', 'month', 'day']}
+              shouldDisableDate={(date) => date.isBefore(moment(), 'day')}
+            />
+          </div>
+          <div className="clock">
+            <TimePicker
+              value={clockTime}
+              disabled={isDisabled}
+              onChange={handleChangeClock}
+              label="Choose a time"
+            />
+          </div>
+          <button onClick={handleSubmit}> Schedule Post</button>
+        </div>
+        <div className="btncontainer">
+          {isVisible && (
+            <div className="delete">
+              <button onClick={handleDeleteClick}>Delete</button>
+            </div>
+          )}
+          {isEditVisible && (
+            <div className="delete">
+              <button onClick={handleEditClick}>Edit</button>
+            </div>
+          )}
+        </div>
       </div>
+      ):(
+        <div>
+
+        </div>
+      )}
     </div>
+    
   );
 }
 export default HomeComponent;

@@ -11,12 +11,30 @@ router.post('/',verify,async(req,res)=>{
     console.log("req,", text)
 
     const connection=await mongoose.connect(process.env.CONNECTION_STRING)
-    const PostInformation=await PostModel.create({
-        email:req.user.email,
-        post:{text:text,username:username, password:password, calendar:calendar,time:time}
-
-    })
-    console.log(PostInformation)
+    const exists=await PostModel.exists({email:req.user.email})
+    if(exists){
+        console.log("yolo")
+        await PostModel.findOneAndUpdate(
+            {
+                email:req.user.email,
+            },
+            {
+                $push:{
+                    post: {text,username,password,calendar,time}
+                },
+            }
+        )
+    }
+    else{
+        const PostInformation=await PostModel.create({
+            email:req.user.email,
+            post:{text:text,username:username, password:password, calendar:calendar,time:time}
+    
+        })
+        console.log(PostInformation)
+    }
+   
+    
     console.log("Post created successfully")
 
 
