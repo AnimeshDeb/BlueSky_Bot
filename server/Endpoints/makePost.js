@@ -13,7 +13,7 @@ router.post('/',verify,async(req,res)=>{
     const connection=await mongoose.connect(process.env.CONNECTION_STRING)
     const exists=await PostModel.exists({email:req.user.email})
     if(exists){
-        console.log("yolo")
+       
         await PostModel.findOneAndUpdate(
             {
                 email:req.user.email,

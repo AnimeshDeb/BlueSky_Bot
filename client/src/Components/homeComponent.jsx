@@ -2,11 +2,10 @@ import { useState } from 'react';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import moment from 'moment';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-import DeleteBtn from './deleteBtn';
-import EditBtn from './editBtn';
 import '../componentStyles/home.css';
+import PropTypes from 'prop-types';
 
-function HomeComponent() {
+function HomeComponent(props) {
   const [text, setText] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -53,14 +52,27 @@ function HomeComponent() {
     setIsEditVisible(false);
   }
 
-  const handleDeleteClick=()=>{
+  const handleDeleteClick=async()=>{
     setContainerVisible(false)
+
+    await fetch('http://localhost:3000/deletePost',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+      },
+      body: JSON.stringify({ text:text}),
+      credentials:'include',
+    })
+  
+    
+
   }
   const handleSubmit = async () => {
     setIsVisible(true);
     setIsEditVisible(true);
     setIsDisabled(true);
     setContainerVisible(true);
+    
     //another method of convertng time state vs useEffect as above:
     //can't directly format the clock and time states as they are initialized to moment() (can't do setClockTime(newValue.format("h:mm A"))), so we do:
     const formmattedTime = clockTime.format('h:mm A');
@@ -70,8 +82,9 @@ function HomeComponent() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        
       },
-      credentials: 'include',
+      
       body: JSON.stringify({
         text: text,
         username: username,
@@ -79,6 +92,7 @@ function HomeComponent() {
         calendar: formattedDate,
         time: formmattedTime,
       }),
+      credentials: 'include',
     });
     const data = await response.json();
     console.log('data ', data);
@@ -161,5 +175,9 @@ function HomeComponent() {
     </div>
     
   );
+}
+
+HomeComponent.propTypes={
+  id:PropTypes.number.isRequired,
 }
 export default HomeComponent;
