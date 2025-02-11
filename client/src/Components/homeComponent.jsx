@@ -5,7 +5,7 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import '../componentStyles/home.css';
 import PropTypes from 'prop-types';
 
-function HomeComponent({id, renderSwitch, setRenderSwitch}) {
+function HomeComponent({ setRenderSwitch}) {
   const [text, setText] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -56,7 +56,10 @@ function HomeComponent({id, renderSwitch, setRenderSwitch}) {
 
   const handleDeleteClick=async()=>{
     setContainerVisible(false)
-    setRenderSwitch((prevCount) => Math.max(prevCount-1,0)); //doesnt go below 0
+    
+    setRenderSwitch((prevCount) => Math.max(prevCount-1,-1)); //doesnt go below -1. It's -1 instead of 0 because
+    //of the switch statement in Home.jsx. Or else if theres no active posts, then clicking add a post
+    //results in case going to 1 instead of 0. So minimum is -1 so it would go to 0.
 
     await fetch('http://localhost:3000/deletePost',{
       method:'POST',
@@ -185,8 +188,6 @@ function HomeComponent({id, renderSwitch, setRenderSwitch}) {
 }
 
 HomeComponent.propTypes={
-  id:PropTypes.number.isRequired,
-  renderSwitch:PropTypes.number.isRequired,
-  setRenderSwitch:PropTypes.number.isRequired,
+  setRenderSwitch:PropTypes.func.isRequired,
 }
 export default HomeComponent;
