@@ -5,7 +5,7 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import '../componentStyles/home.css';
 import PropTypes from 'prop-types';
 
-function HomeComponent(props) {
+function HomeComponent({id, renderSwitch, setRenderSwitch}) {
   const [text, setText] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -15,7 +15,7 @@ function HomeComponent(props) {
   const [isEditVisible, setIsEditVisible] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
   const [isContainerVisible, setContainerVisible]=useState(true)
-  
+  const[isScheduleVisible, setIsScheduleVisible]=useState(true);
   const handleChangeText = (event) => {
     setText(event.target.value);
     console.log(text);
@@ -50,10 +50,13 @@ function HomeComponent(props) {
   const handleEditClick = () => {
     setIsDisabled(false);
     setIsEditVisible(false);
+    setIsScheduleVisible(true);
+    setIsVisible(false);
   }
 
   const handleDeleteClick=async()=>{
     setContainerVisible(false)
+    setRenderSwitch((prevCount) => Math.max(prevCount-1,0)); //doesnt go below 0
 
     await fetch('http://localhost:3000/deletePost',{
       method:'POST',
@@ -72,6 +75,7 @@ function HomeComponent(props) {
     setIsEditVisible(true);
     setIsDisabled(true);
     setContainerVisible(true);
+    setIsScheduleVisible(false);
     
     //another method of convertng time state vs useEffect as above:
     //can't directly format the clock and time states as they are initialized to moment() (can't do setClockTime(newValue.format("h:mm A"))), so we do:
@@ -152,7 +156,10 @@ function HomeComponent(props) {
               label="Choose a time"
             />
           </div>
-          <button onClick={handleSubmit}> Schedule Post</button>
+          {isScheduleVisible && (
+                      <button onClick={handleSubmit}> Schedule Post</button>
+
+          )}
         </div>
         <div className="btncontainer">
           {isVisible && (
@@ -179,5 +186,7 @@ function HomeComponent(props) {
 
 HomeComponent.propTypes={
   id:PropTypes.number.isRequired,
+  renderSwitch:PropTypes.number.isRequired,
+  setRenderSwitch:PropTypes.number.isRequired,
 }
 export default HomeComponent;
