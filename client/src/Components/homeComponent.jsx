@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import moment from 'moment';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
@@ -6,6 +6,7 @@ import '../componentStyles/home.css';
 import PropTypes from 'prop-types';
 
 function HomeComponent({ setRenderSwitch}) {
+  
   const [text, setText] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -16,6 +17,28 @@ function HomeComponent({ setRenderSwitch}) {
   const [isDisabled, setIsDisabled] = useState(false);
   const [isContainerVisible, setContainerVisible]=useState(true)
   const[isScheduleVisible, setIsScheduleVisible]=useState(true);
+
+  // useEffect( ()=>{
+  //   async function fetchPostInfo(){
+  //     const response=await fetch(`http://localhost:3000/getPostInfo?id=${id}`,{
+  //       method:'GET',
+  //       headers:{
+  //         'Content-Type':'application/json' },
+  //         credentials:'include',
+
+  //     })
+  //     const data=await response.json()
+  //     // const data_time=moment(data.time).toISOString
+  //     // const data_cal=moment(data.calendar).toISOString
+  //     // console.log('time', data_time, ' cal', data_cal)
+  //     setText(data.text)
+  //     setUsername(data.username)
+  //     setPassword(data.password)
+  //     // setClockTime(data_time)
+  //     // setCalDate(moment(data_cal))
+  //   }
+  //   fetchPostInfo()
+  // }, [id])
   const handleChangeText = (event) => {
     setText(event.target.value);
     console.log(text);
@@ -47,32 +70,36 @@ function HomeComponent({ setRenderSwitch}) {
   //   setFormatTime(ftime)
   // }, [clockTime, formatTime])
 
-  const handleEditClick = () => {
-    setIsDisabled(false);
-    setIsEditVisible(false);
-    setIsScheduleVisible(true);
-    setIsVisible(false);
-  }
 
-  const handleDeleteClick=async()=>{
-    setContainerVisible(false)
+  //MOVE TO ANOTHER FILE 
+  // const handleEditClick = () => {
+  //   setIsDisabled(false);
+  //   setIsEditVisible(false);
+  //   setIsScheduleVisible(true);
+  //   setIsVisible(false);
+  // }
+
+  // const handleDeleteClick=async()=>{
+  //   setContainerVisible(false)
     
-    setRenderSwitch((prevCount) => Math.max(prevCount-1,-1)); //doesnt go below -1. It's -1 instead of 0 because
-    //of the switch statement in Home.jsx. Or else if theres no active posts, then clicking add a post
-    //results in case going to 1 instead of 0. So minimum is -1 so it would go to 0.
+  //   setRenderSwitch((prevCount) => Math.max(prevCount-1,-1)); //doesnt go below -1. It's -1 instead of 0 because
+  //   //of the switch statement in Home.jsx. Or else if theres no active posts, then clicking add a post
+  //   //results in case going to 1 instead of 0. So minimum is -1 so it would go to 0.
 
-    await fetch('http://localhost:3000/deletePost',{
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json',
-      },
-      body: JSON.stringify({ text:text}),
-      credentials:'include',
-    })
+  //   await fetch('http://localhost:3000/deletePost',{
+  //     method:'POST',
+  //     headers:{
+  //       'Content-Type':'application/json',
+  //     },
+  //     body: JSON.stringify({ text:text}),
+  //     credentials:'include',
+  //   })
   
     
 
-  }
+  // }
+
+
   const handleSubmit = async () => {
     setIsVisible(true);
     setIsEditVisible(true);
@@ -84,7 +111,7 @@ function HomeComponent({ setRenderSwitch}) {
     //can't directly format the clock and time states as they are initialized to moment() (can't do setClockTime(newValue.format("h:mm A"))), so we do:
     const formmattedTime = clockTime.format('h:mm A');
     const formattedDate = calDate.format('MM-DD-YYYY');
-
+    
     const response = await fetch('http://localhost:3000/makePost', {
       method: 'POST',
       headers: {
@@ -98,6 +125,8 @@ function HomeComponent({ setRenderSwitch}) {
         password: password,
         calendar: formattedDate,
         time: formmattedTime,
+        
+
       }),
       credentials: 'include',
     });
@@ -165,7 +194,7 @@ function HomeComponent({ setRenderSwitch}) {
           )}
         </div>
         <div className="btncontainer">
-          {isVisible && (
+          {/* {isVisible && (
             <div className="delete">
               <button onClick={handleDeleteClick}>Delete</button>
             </div>
@@ -174,7 +203,7 @@ function HomeComponent({ setRenderSwitch}) {
             <div className="delete">
               <button onClick={handleEditClick}>Edit</button>
             </div>
-          )}
+          )} */}
         </div>
       </div>
       ):(

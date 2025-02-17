@@ -1,5 +1,5 @@
 import HomeComponent from '../Components/homeComponent';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import '../styles/Home.css';
 
 function Home() {
@@ -14,47 +14,50 @@ function Home() {
 
   const renderMessage = () => {
      
-
+  // if (renderSwitch===5){console.log("MAX LIMIT REACHED")}
       switch (renderSwitch) {
-        case 0:
-          console.log("case 0")
-          return  [
-            <HomeComponent key={6} id={6} renderSwitch={renderSwitch} setRenderSwitch={setRenderSwitch} />,
-
-          ];
-        case 1:
-          console.log("case 1")
-          return [
-            <HomeComponent key={6} id={6} renderSwitch={renderSwitch} setRenderSwitch={setRenderSwitch} />,
-
-          <HomeComponent key={2} id={2} renderSwitch={renderSwitch} setRenderSwitch={setRenderSwitch} />];
-        case 2:
-          console.log("case 2")
-          return [
-            <HomeComponent key={6} id={6} renderSwitch={renderSwitch} setRenderSwitch={setRenderSwitch} />,
-
-            <HomeComponent key={2} id={2} renderSwitch={renderSwitch} setRenderSwitch={setRenderSwitch} />,
-            <HomeComponent key={3} id={3} renderSwitch={renderSwitch} setRenderSwitch={setRenderSwitch} />,
-          ];
-        case 3:
-          console.log("case 3")
-          return [
-            <HomeComponent key={6} id={6} renderSwitch={renderSwitch} setRenderSwitch={setRenderSwitch} />,
-
-            <HomeComponent key={2} id={2} renderSwitch={renderSwitch} setRenderSwitch={setRenderSwitch} />,
-            <HomeComponent key={3} id={3} renderSwitch={renderSwitch} setRenderSwitch={setRenderSwitch} />,
-            <HomeComponent key={4} id={4} renderSwitch={renderSwitch} setRenderSwitch={setRenderSwitch} />,
-          ];
         case 4:
-          console.log("case 4")
-          return [
-            <HomeComponent key={6} id={6} renderSwitch={renderSwitch} setRenderSwitch={setRenderSwitch} />,
+          console.log("MAX LIMIT REACHED")
+          return
+        // case 0:
+        //   console.log("case 0")
+        //   return  [
+        //     <HomeComponent key={6} id={6} renderSwitch={renderSwitch} setRenderSwitch={setRenderSwitch} />,
 
-            <HomeComponent key={2} id={2} renderSwitch={renderSwitch} setRenderSwitch={setRenderSwitch} />,
-            <HomeComponent key={3} id={3} renderSwitch={renderSwitch} setRenderSwitch={setRenderSwitch} />,
-            <HomeComponent key={4} id={4} renderSwitch={renderSwitch} setRenderSwitch={setRenderSwitch} />,
-            <HomeComponent key={5} id={5} renderSwitch={renderSwitch} setRenderSwitch={setRenderSwitch} />,
-          ];
+        //   ];
+        // case 1:
+        //   console.log("case 1")
+        //   return [
+        //     <HomeComponent key={6} id={6} renderSwitch={renderSwitch} setRenderSwitch={setRenderSwitch} />,
+
+        //   <HomeComponent key={2} id={2} renderSwitch={renderSwitch} setRenderSwitch={setRenderSwitch} />];
+        // case 2:
+        //   console.log("case 2")
+        //   return [
+        //     <HomeComponent key={6} id={6} renderSwitch={renderSwitch} setRenderSwitch={setRenderSwitch} />,
+
+        //     <HomeComponent key={2} id={2} renderSwitch={renderSwitch} setRenderSwitch={setRenderSwitch} />,
+        //     <HomeComponent key={3} id={3} renderSwitch={renderSwitch} setRenderSwitch={setRenderSwitch} />,
+        //   ];
+        // case 3:
+        //   console.log("case 3")
+        //   return [
+        //     <HomeComponent key={6} id={6} renderSwitch={renderSwitch} setRenderSwitch={setRenderSwitch} />,
+
+        //     <HomeComponent key={2} id={2} renderSwitch={renderSwitch} setRenderSwitch={setRenderSwitch} />,
+        //     <HomeComponent key={3} id={3} renderSwitch={renderSwitch} setRenderSwitch={setRenderSwitch} />,
+        //     <HomeComponent key={4} id={4} renderSwitch={renderSwitch} setRenderSwitch={setRenderSwitch} />,
+        //   ];
+        // case 4:
+        //   console.log("case 4")
+        //   return [
+        //     <HomeComponent key={6} id={6} renderSwitch={renderSwitch} setRenderSwitch={setRenderSwitch} />,
+
+        //     <HomeComponent key={2} id={2} renderSwitch={renderSwitch} setRenderSwitch={setRenderSwitch} />,
+        //     <HomeComponent key={3} id={3} renderSwitch={renderSwitch} setRenderSwitch={setRenderSwitch} />,
+        //     <HomeComponent key={4} id={4} renderSwitch={renderSwitch} setRenderSwitch={setRenderSwitch} />,
+        //     <HomeComponent key={5} id={5} renderSwitch={renderSwitch} setRenderSwitch={setRenderSwitch} />,
+        //   ];
         default:
          return null;
       
@@ -69,11 +72,10 @@ function Home() {
   return (
     <div className="home-container">
       <div className="homecomponent">
-        {/* <HomeComponent
-          id={ids[0]}
+        <HomeComponent
           renderSwitch={renderSwitch}
           setRenderSwitch={setRenderSwitch}
-        /> */}
+        />
       </div>
       <div>
         <div>{renderMessage()}</div>

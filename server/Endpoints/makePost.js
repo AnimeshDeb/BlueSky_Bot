@@ -28,7 +28,7 @@ router.post('/',verify,async(req,res)=>{
     else{
         const PostInformation=await PostModel.create({
             email:req.user.email,
-            post:{text:text,username:username, password:password, calendar:calendar,time:time}
+            post:{text:text,username:username, password:password, calendar:calendar,time:time, id:id}
     
         })
         console.log(PostInformation)
