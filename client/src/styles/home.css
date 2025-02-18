@@ -19,3 +19,16 @@
 button {
     margin-top: 20px; /* Add spacing between homecomponent and button */
 }
+
+.header{
+    color:black;
+    display:flex;
+    justify-content: center;
+    gap:50px;
+}
+
+.superContainer{
+    gap:70px;
+    display: flex;
+    flex-direction: column;
+}

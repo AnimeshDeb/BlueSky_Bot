@@ -5,6 +5,7 @@ import Login from './Routes/Login';
 import Signup from './Routes/Signup';
 import Home from './Routes/Home';
 import Routeguard from './Routeguard/Routeguard';
+import Posts from './Routes/Posts';
 function App() {
   return (
     <Routes>
@@ -12,6 +13,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/home" element={<Routeguard><Home /> </Routeguard>} />
+      <Route path="/posts" element={<Routeguard><Posts/></Routeguard>} />
     </Routes>
   );
 }

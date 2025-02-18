@@ -9,21 +9,23 @@ router.get('/', verify, async (req,res)=>{
     await mongoose.connect(process.env.CONNECTION_STRING)
 
     try{
-        const query=await PostModel.findOne({email: email, "post.id":id},
-            {"post.$":1}
+        const query=await PostModel.findOne({email: email}
         )
-        if(!query){
-            return res.json({data:"NULL"})
-        }
+        // if(!query){
+        //     return res.json({data:"NULL"})
+        // }
+
+        const textFields = query.post.map(item => item.text);
+
+        console.log("query: " , textFields)
        
-        const text=query.post[0].text
-        const username=query.post[0].username
-        const password=query.post[0].password
-        const calendar=query.post[0].calendar
-        const time=query.post[0].time
+        // const text=query.post[0].text
+        // const username=query.post[0].username
+        // const password=query.post[0].password
+        // const calendar=query.post[0].calendar
+        // const time=query.post[0].time
        
-      
-        res.json({text:text, username:username, password:password, calendar:calendar, time:time})
+        res.json({data: textFields})
         
     }
     catch(error){console.error(error)}
