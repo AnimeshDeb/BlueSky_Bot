@@ -2,6 +2,7 @@ import express from 'express'
 import verify from '../Middleware/verifyToken.js'
 import mongoose from 'mongoose'
 import PostModel from '../Schema/Posts/post.js'
+import runProcess from '../scripts/cronjob.js'
 const router=express.Router()
 
 router.post('/',verify,async(req,res)=>{
@@ -28,14 +29,36 @@ router.post('/',verify,async(req,res)=>{
     else{
         const PostInformation=await PostModel.create({
             email:req.user.email,
-            post:{text:text,username:username, password:password, calendar:calendar,time:time, id:id}
+            post:{text:text,username:username, password:password, calendar:calendar,time:time, script:"true"}
     
         })
+        runProcess("ah@gmail.com")//sample
         console.log(PostInformation)
     }
    
     
     console.log("Post created successfully")
+
+
+
+
+    mongoose.disconnect()
+    return res.json({text:text, username:username, password:password,calendar:calendar, time:time})
+
+    
+
+
+
+    }
+    catch(error)
+    {
+        console.error(error)
+    }
+})
+export default router
+
+
+
 
 
 
@@ -51,13 +74,3 @@ router.post('/',verify,async(req,res)=>{
     // const refreshjwt=data.refreshJwt
     // //works so far
     
-
-    mongoose.disconnect()
-    return res.json({text:text, username:username, password:password,calendar:calendar, time:time})
-    }
-    catch(error)
-    {
-        console.error(error)
-    }
-})
-export default router

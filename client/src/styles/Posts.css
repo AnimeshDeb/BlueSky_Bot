@@ -1,3 +1,25 @@
 .container{
     color:black;
 }
+
+.textContainer{
+   
+    display:flex;
+    flex-direction: column;
+    gap:20px;
+}
+
+.text{
+    display: flex;
+    flex-direction: column;
+    height:150px;
+    text-wrap: wrap;
+    background-color: brown;
+}
+
+.editBtn{
+    width:10%;
+}
+.deleteBtn{
+    width:10%;
+}

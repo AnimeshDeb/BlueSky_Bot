@@ -5,7 +5,7 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import '../componentStyles/home.css';
 import PropTypes from 'prop-types';
 
-function HomeComponent({ setRenderSwitch}) {
+function HomeComponent() {
   
   const [text, setText] = useState('');
   const [username, setUsername] = useState('');

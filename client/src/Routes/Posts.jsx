@@ -24,11 +24,17 @@ function Posts() {
 
   return (
     <div className="container">
-      <ul>
+      <div className='textContainer'>
+
         {posts.map((text, index) => (
-          <li key={index}>{text}</li>
+        
+          <div className='text' key={index}>
+            <button className='deleteBtn'>Delete </button>
+            <button className='editBtn'>Edit</button>
+            {text}
+            </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

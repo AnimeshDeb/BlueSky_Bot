@@ -12,7 +12,6 @@ const postSchema=new Schema(
             password:{type:String, required:true},
             calendar:{type:String, required:true},
             time:{type:String, required:true},
-            id:{type:Number, required:true},
         }]
 
     }
