@@ -4,18 +4,15 @@ import PostModel from '../Schema/Posts/post.js';
 import dotenv from 'dotenv';
 import express from 'express';
 
-dotenv.config(); // Load environment variables
+dotenv.config(); 
 
-// Function to process posts
 async function processPosts(email, postToPlatform) {
   try {
-    // Connect to MongoDB
 
     await mongoose.connect(
       'CONNECTION_STRING'
     );
 
-    // Get the current time formatted to match scheduled posts
     const now = new Date();
     const formattedTime = now.toLocaleTimeString('en-US', {
       hour: 'numeric',
@@ -42,8 +39,7 @@ async function processPosts(email, postToPlatform) {
     
     const postsToProcess = await PostModel.findOne()
       .where("email").equals(email)
-      // .where("post.calendar").equals("03-28-2025")
-      // .where("post.time").equals("6:00 PM")
+      
       .select("post.text post.username post.password post.time post.calendar -_id")
     console.log('post dictionary array: ', postsToProcess.post);
 
@@ -55,24 +51,23 @@ async function processPosts(email, postToPlatform) {
         postingArray.push({username: postsToProcess.post[i].username, password: postsToProcess.post[i].password, text: postsToProcess.post[i].text})
       }
     }
-    console.log("posting array: ", postingArray)
+    
     if (!postsToProcess) {
       console.log('No posts at this time');
     }
     if (postsToProcess && postingArray.length > 0) {
-      // Check if `postsToProcess` exists and has posts
+      
       for (const post of postingArray) {
-        // Iterate through the `post` array
+        
 
         console.log(`Posting: ${post.text}`);
 
-        // Call your function to post to Bluesky or another platform here
+        
         await postToPlatform(post);
 
-        // Remove the posted item from the database
         await PostModel.findOneAndUpdate(
-          { email: postsToProcess.email }, // Use email from the main object
-          { $pull: { post: { _id: post._id } } } // Remove the posted item based on _id
+          { email: postsToProcess.email }, 
+          { $pull: { post: { _id: post._id } } }
         );
       }
     } else {
