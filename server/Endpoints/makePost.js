@@ -32,7 +32,7 @@ router.post('/',verify,async(req,res)=>{
             post:{text:text,username:username, password:password, calendar:calendar,time:time, script:"true"}
     
         })
-        runProcess("ah@gmail.com")//sample
+        runProcess(req.user.email)
         console.log(PostInformation)
     }
    

@@ -1,4 +1,3 @@
-
 import cron from 'node-cron';
 import mongoose from 'mongoose';
 import PostModel from '../Schema/Posts/post.js';
@@ -8,8 +7,7 @@ import express from 'express';
 dotenv.config(); // Load environment variables
 
 // Function to process posts
-async function processPosts(email) {
-  
+async function processPosts(email, postToPlatform) {
   try {
     // Connect to MongoDB
 
@@ -19,45 +17,51 @@ async function processPosts(email) {
 
     // Get the current time formatted to match scheduled posts
     const now = new Date();
-    const formattedTime = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
-    const formattedDate = now.toLocaleDateString('en-US',{
+    const formattedTime = now.toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true,
+    });
+    const formattedDate = now
+      .toLocaleDateString('en-US', {
         month: '2-digit',
-        day:'2-digit',
-        year:'numeric'
-    }).replace(/\//g,'-');
-    console.log("Email ", email)
-    console.log("date", formattedDate)
-    console.log("time ", formattedTime)
-    console.log(
-      'type of formattedTime and date: ',
-      typeof(formattedTime),
-      ' ',
-      typeof(formattedDate)
-    );
+        day: '2-digit',
+        year: 'numeric',
+      })
+      .replace(/\//g, '-');
+    console.log('Email ', email);
+    console.log('date', formattedDate);
+    console.log('time ', formattedTime);
+    
     console.log(
       `Checking for posts scheduled at ${formattedDate} ${formattedTime}...`
     );
 
     // Find posts that need to be posted now
-    const postsToProcess = await PostModel.find({
-      email,
-      "post.calendar": formattedDate,
-      "post.time": formattedTime
-    });
-    console.log("postsToProcess ", postsToProcess)
+
     
-    // const postsToProcess = await PostModel.findOne(
-    //   {
-    //     email:email,
-    //     post: { $elemMatch: { "post.calendar": formattedDate, "post.time": formattedTime } },
-    //   },
-    //   { 'post.text': 1, 'post.username': 1, 'post.password': 1, _id: 0 }
-    // );
+    const postsToProcess = await PostModel.findOne()
+      .where("email").equals(email)
+      // .where("post.calendar").equals("03-28-2025")
+      // .where("post.time").equals("6:00 PM")
+      .select("post.text post.username post.password post.time post.calendar -_id")
     console.log('post dictionary array: ', postsToProcess.post);
-    if (!postsToProcess){console.log("No posts at this time")}
-    if (postsToProcess && postsToProcess.post.length > 0) {
+
+    let postingArray=[]
+    for (let i=0;i<postsToProcess.post.length;i++)
+    {
+      if (postsToProcess.post[i].calendar==formattedDate && postsToProcess.post[i].time==formattedTime)
+      {
+        postingArray.push({username: postsToProcess.post[i].username, password: postsToProcess.post[i].password, text: postsToProcess.post[i].text})
+      }
+    }
+    console.log("posting array: ", postingArray)
+    if (!postsToProcess) {
+      console.log('No posts at this time');
+    }
+    if (postsToProcess && postingArray.length > 0) {
       // Check if `postsToProcess` exists and has posts
-      for (const post of postsToProcess.post) {
+      for (const post of postingArray) {
         // Iterate through the `post` array
 
         console.log(`Posting: ${post.text}`);
@@ -84,7 +88,7 @@ async function processPosts(email) {
 
 export default async function runProcess(email) {
   console.log('running process ... ');
-  console.log("Email running process is: ", email)
+  console.log('Email running process is: ', email);
 
   // Function to simulate posting to Bluesky
   async function postToPlatform(post) {
@@ -96,7 +100,7 @@ export default async function runProcess(email) {
   // Schedule cron job to run every 5 minutes
   cron.schedule('*/5 * * * *', () => {
     console.log('Running cron job...');
-    processPosts(email);
+    processPosts(email, postToPlatform);
   });
 
   // Keep the script running
@@ -104,4 +108,3 @@ export default async function runProcess(email) {
 }
 
 
-runProcess("ag@gmail.com")
