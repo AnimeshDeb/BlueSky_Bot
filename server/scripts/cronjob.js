@@ -3,6 +3,8 @@ import mongoose from 'mongoose';
 import PostModel from '../Schema/Posts/post.js';
 import dotenv from 'dotenv';
 import express from 'express';
+import {AtpAgent} from '@atproto/api'
+import axios from 'axios'
 
 dotenv.config(); 
 
@@ -10,7 +12,7 @@ async function processPosts(email, postToPlatform) {
   try {
 
     await mongoose.connect(
-      'CONNECTION_STRING'
+      "CONNECTION_STRING"
     );
 
     const now = new Date();
@@ -85,10 +87,24 @@ export default async function runProcess(email) {
   console.log('running process ... ');
   console.log('Email running process is: ', email);
 
-  // Function to simulate posting to Bluesky
+  // Function to post to Bluesky
   async function postToPlatform(post) {
-    console.log(`Sending post to platform: ${post.text}`);
-    // Add API call logic to Bluesky here
+
+    const agent=new AtpAgent({service:'https://bsky.social'})
+    const bluesky_handle=post.username
+    const bluesky_password=post.password 
+
+    async function login(){
+      const agentPost= await agent.login({identifier:bluesky_handle, password:bluesky_password})
+      await agent.post({text:post.text, createdAt: new Date().toISOString()})
+      console.log("Posted: ", post.text)
+
+      console.log('Access token: ', agent.session.accessJwt)
+    }
+    login()
+   
+    
+    
   }
 
   // processPosts()
