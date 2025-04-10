@@ -24,13 +24,16 @@ function Posts() {
 
   return (
     <div className="container">
+      <div className='buttonContainer'>
+        <button>Delete</button>
+        <button>Edit</button>
+      </div>
       <div className='textContainer'>
 
         {posts.map((text, index) => (
         
           <div className='text' key={index}>
-            <button className='deleteBtn'>Delete </button>
-            <button className='editBtn'>Edit</button>
+           
             {text}
             </div>
         ))}

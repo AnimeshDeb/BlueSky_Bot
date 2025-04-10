@@ -1,25 +1,64 @@
-.container{
-    color:black;
-}
 
-.textContainer{
-   
-    display:flex;
-    flex-direction: column;
-    gap:20px;
-}
-
-.text{
+ *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: white;
+    color: white;
+    overflow-x: hidden;
+  }
+  
+  .container {
+    width: 100vw;
     display: flex;
+    justify-content: center;
+    padding: 40px 0;
     flex-direction: column;
-    height:150px;
-    text-wrap: wrap;
-    background-color: brown;
-}
+  }
+  
+  .buttonContainer{
+    display: flex;
+    gap:20px;
+    justify-content: center;
+    margin-left: -365px;
 
-.editBtn{
-    width:10%;
-}
-.deleteBtn{
-    width:10%;
-}
+
+  }
+  .buttonContainer button{
+    background-color: #3457D5;
+  }
+
+  .textContainer {
+    margin-left: 45px !important;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .text {
+    background-color: rgba(0, 80, 255, 0.3); 
+    color: white;
+    width: 200px;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px); 
+    -webkit-backdrop-filter: blur(8px);
+    text-align: center;
+    transition: transform 0.2s ease;
+  }
+  
+  .text:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+  }
+
+
+  
