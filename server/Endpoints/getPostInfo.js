@@ -15,7 +15,10 @@ router.get('/', verify, async (req,res)=>{
         //     return res.json({data:"NULL"})
         // }
 
-        const textFields = query.post.map(item => item.text);
+        const textFields = query.post.map(item => ({
+            text:item.text,
+            _id:item._id.toString(),
+        }));
 
         console.log("query: " , textFields)
        

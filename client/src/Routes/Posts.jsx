@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import '../styles/Posts.css';
+import styles from '../styles/Posts.module.css';
 
 function Posts() {
   const [posts, setPosts] = useState([]);
@@ -23,18 +23,19 @@ function Posts() {
   }, []);
 
   return (
-    <div className="container">
-      <div className='buttonContainer'>
+    <div className={styles.container}>
+      <div className={styles.buttonContainer}>
         <button>Delete</button>
         <button>Edit</button>
       </div>
-      <div className='textContainer'>
+      <div className={styles.textContainer}>
 
         {posts.map((text, index) => (
         
-          <div className='text' key={index}>
+          <div className={styles.text} key={index}>
            
-            {text}
+            <p>Posted Message: {text.text}</p>
+            <p>ID: {text._id}</p>
             </div>
         ))}
       </div>
