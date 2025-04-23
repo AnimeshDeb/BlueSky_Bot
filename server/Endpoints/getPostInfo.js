@@ -17,6 +17,8 @@ router.get('/', verify, async (req,res)=>{
 
         const textFields = query.post.map(item => ({
             text:item.text,
+            calendar:item.calendar,
+            time: item.time,
             _id:item._id.toString(),
         }));
 
