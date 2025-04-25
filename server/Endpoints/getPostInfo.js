@@ -1,46 +1,55 @@
-import express from 'express'
-import verify from '../Middleware/verifyToken.js'
-import mongoose from 'mongoose'
-import PostModel from '../Schema/Posts/post.js'
-const router=express.Router()
+import express from 'express';
+import verify from '../Middleware/verifyToken.js';
+import mongoose from 'mongoose';
+import PostModel from '../Schema/Posts/post.js';
+const router = express.Router();
 
-router.get('/', verify, async (req,res)=>{
-    const email=req.user.email
-    await mongoose.connect(process.env.CONNECTION_STRING)
+router.get('/', verify, async (req, res) => {
+  const email = req.user.email;
+  const { userID } = req.query;
 
-    try{
-        const query=await PostModel.findOne({email: email}
-        )
-        // if(!query){
-        //     return res.json({data:"NULL"})
-        // }
+  await mongoose.connect(process.env.CONNECTION_STRING);
 
-        const textFields = query.post.map(item => ({
-            text:item.text,
-            calendar:item.calendar,
-            time: item.time,
-            _id:item._id.toString(),
-        }));
+  try {
+    if (userID) {
+      console.log('user id backend: ', userID);
+      const messageID = new mongoose.Types.ObjectId(`${userID}`);
+      const query = await PostModel.findOne(
+        { email, 'post._id': messageID },
+        { 'post.$': 1 }
+      );
+      const textField = query.post[0].text;
+      console.log('textField ', textField);
+      return res.json({ data: textField });
+      // console.log("QUERYPOST: ", query.post[0].text)
+    } else {
+      const query = await PostModel.findOne({ email: email });
+      // if(!query){
+      //     return res.json({data:"NULL"})
+      // }
 
-        console.log("query: " , textFields)
-       
-        // const text=query.post[0].text
-        // const username=query.post[0].username
-        // const password=query.post[0].password
-        // const calendar=query.post[0].calendar
-        // const time=query.post[0].time
-       
-        res.json({data: textFields})
-        
+      const textFields = query.post.map((item) => ({
+        text: item.text,
+        calendar: item.calendar,
+        time: item.time,
+        _id: item._id.toString(),
+      }));
+
+      // const text=query.post[0].text
+      // const username=query.post[0].username
+      // const password=query.post[0].password
+      // const calendar=query.post[0].calendar
+      // const time=query.post[0].time
+
+      res.json({ data: textFields });
     }
-    catch(error){console.error(error)}
-    //querying for a document containing the user email, where the specific id field 
-    // of the post[] is the id of the component we are considering in the frontend.
+  } catch (error) {
+    console.error(error);
+  }
+  //querying for a document containing the user email, where the specific id field
+  // of the post[] is the id of the component we are considering in the frontend.
 
-    
+  await mongoose.disconnect();
+});
 
-    await mongoose.disconnect()
-
-})
-
-export default router
+export default router;
