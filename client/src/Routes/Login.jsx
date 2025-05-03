@@ -56,11 +56,11 @@ function Login() {
           </p>
         </div>
         <div className={loginStyles.loginImg}>
-        <img
-          src={loginImg}
-          alt="Login Image"
-          className={loginStyles.loginImage}
-        />
+          <img
+            src={loginImg}
+            alt="Login Image"
+            className={loginStyles.loginImage}
+          />
         </div>
 
         {/* 
@@ -80,21 +80,23 @@ function Login() {
               Don't have an account? <Link to="/signup">Sign Up</Link>
             </p>
           </div>
-          <label htmlFor="emailLabel">Email:</label>
-          <input
-            type="text"
-            placeholder="Email"
-            value={email}
-            onChange={handleEmailChange}
-          />
-          <label htmlFor="passwordLabel">Password:</label>
+          <div className={loginStyles.email_password}>
+            <label htmlFor="emailLabel">Email:</label>
+            <input
+              type="text"
+              placeholder="Email"
+              value={email}
+              onChange={handleEmailChange}
+            />
+            <label htmlFor="passwordLabel">Password:</label>
 
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={handlePasswordChange}
+            />
+          </div>
           {passwordIncorrect && <PasswordIncorrect />}
 
           <button onClick={handleSubmit}>Login</button>
