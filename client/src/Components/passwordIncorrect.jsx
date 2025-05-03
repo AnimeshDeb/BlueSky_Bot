@@ -1,4 +1,4 @@
-import '../componentStyles/passwordmatch.css'
+import '../styles/passwordmatch.css'
 function PasswordIncorrect(){
     return(
         <div className='passwordInfo'>

@@ -1,5 +1,5 @@
-import '../styles/landing.css';
 import {useNavigate} from 'react-router-dom'
+import '../styles/landing.css'
 function Landing() {
 const navigate=useNavigate();
   const navigateLogin=()=>{
@@ -9,9 +9,9 @@ const navigate=useNavigate();
     navigate('/signup')
   }
   return (
-    <div className='contain7er'>
+    <div className='container'>
         <div className='home-left'>
-PLACE HOLDER TEXT
+PLACE HOLDER TEXT LANDING
         </div>
       <div className='home'>
         <button className='btn' onClick={navigateLogin} >Login</button>

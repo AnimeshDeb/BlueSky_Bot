@@ -9,6 +9,7 @@ import deletePost from './Endpoints/deletePost.js'
 import mongoose from 'mongoose'
 import getPostInfo from './Endpoints/getPostInfo.js'
 import editPost from './Endpoints/editPost.js'
+import logout from './Endpoints/logout.js'
 // import ProcessPost from './scripts/cronjob.js'
 const app=express()
 
@@ -30,6 +31,7 @@ app.use('/makePost', makePost)
 app.use('/deletePost', deletePost)
 app.use('/getPostInfo', getPostInfo)
 app.use('/editPost', editPost)
+app.use('/logout', logout)
 // app.use('/pp', ProcessPost)
 app.listen(3000,()=>{
   console.log('Server running on port 3000')

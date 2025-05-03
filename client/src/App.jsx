@@ -9,7 +9,7 @@ import Posts from './Routes/Posts';
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Landing />} />
+      <Route path="/" element={<Login />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/home" element={<Routeguard><Home /> </Routeguard>} />

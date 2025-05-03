@@ -3,6 +3,7 @@ import PasswordMatch from '../Components/passwordmatch';
 import PasswordRequirements from '../Components/passwordRequirements';
 import EmailExists from '../Components/emailAlreadyExists';
 import { useNavigate } from 'react-router-dom';
+import '../styles/signup.css'
 function Signup() {
   const navigate=useNavigate()
   const [email, setEmail] = useState('');

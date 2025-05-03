@@ -1,4 +1,4 @@
-import '../componentStyles/passwordmatch.css'
+import '../styles/passwordmatch.css'
 function EmailExists(){
     return(
         <div className="passwordInfo">

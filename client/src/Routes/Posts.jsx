@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import styles from '../styles/Posts.module.css';
-
+import styles from '../styles/posts.module.css'
 function Posts() {
   const [posts, setPosts] = useState([]);
   const [isDeleteVisible, setisDeleteVisible] = useState(false);
@@ -83,8 +82,9 @@ function Posts() {
     })
     const data=await response.json()
     setisFinishEditVisible(false)
-    setInputMessageID(' ')
+    
     setReload((prev) => !prev)
+    setInputMessageID(null)
     console.log("edit data ", data.data)
   }
 

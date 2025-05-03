@@ -1,4 +1,5 @@
-import '../componentStyles/passwordmatch.css'
+import '../styles/passwordmatch.css'
+
 function PasswordRequirements(){
     return(
 

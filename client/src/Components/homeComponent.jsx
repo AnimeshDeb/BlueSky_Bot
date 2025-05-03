@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import moment from 'moment';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-import '../componentStyles/home.css';
+import homeStyles from '../styles/createpost.module.css'
 import PropTypes from 'prop-types';
 
 function HomeComponent() {
@@ -136,14 +136,14 @@ function HomeComponent() {
 
   return (
     
-    <div>
+    <div className={homeStyles.postHeader}>
 
-      {isContainerVisible ? (
-        <div className="container">
+      
+        <div className={homeStyles.container}>
     
-        <div className="information">
-          <div className="information_sub">
-            <div className="bluesky_header">Bluesky Credentials:</div>
+        <div className={homeStyles.information}>
+          <div className={homeStyles.information_sub}>
+            <div className={homeStyles.bluesky_header}>Bluesky Credentials:</div>
             <input
               disabled={isDisabled}
               type="text"
@@ -159,18 +159,18 @@ function HomeComponent() {
               onChange={handleChangePassword}
             />
           </div>
-          <div className="text">
+          <div className={homeStyles.text}>
             <textarea
               type="text"
               disabled={isDisabled}
-              placeholder="Text"
+              placeholder="Type your post..."
               className="text_input"
               value={text}
               onChange={handleChangeText}
             ></textarea>
           </div>
         </div>
-        <div className="time">
+        <div className={homeStyles.time}>
           <div className="calander">
             <DateCalendar
               disabled={isDisabled}
@@ -180,7 +180,7 @@ function HomeComponent() {
               shouldDisableDate={(date) => date.isBefore(moment(), 'day')}
             />
           </div>
-          <div className="clock">
+          <div className={homeStyles.clock}>
             <TimePicker
               value={clockTime}
               disabled={isDisabled}
@@ -193,24 +193,9 @@ function HomeComponent() {
 
           )}
         </div>
-        <div className="btncontainer">
-          {/* {isVisible && (
-            <div className="delete">
-              <button onClick={handleDeleteClick}>Delete</button>
-            </div>
-          )}
-          {isEditVisible && (
-            <div className="delete">
-              <button onClick={handleEditClick}>Edit</button>
-            </div>
-          )} */}
-        </div>
+        
       </div>
-      ):(
-        <div>
-
-        </div>
-      )}
+      
     </div>
     
   );
