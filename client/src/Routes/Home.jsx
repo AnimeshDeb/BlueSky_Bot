@@ -1,4 +1,4 @@
-import HomeComponent from '../Components/homeComponent';
+import HomeComponent from './homeComponent';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/userhome.module.css'

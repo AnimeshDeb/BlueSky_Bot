@@ -43,7 +43,7 @@ router.post('/',verify,async(req,res)=>{
 
 
     mongoose.disconnect()
-    return res.json({text:text, username:username, password:password,calendar:calendar, time:time})
+    return res.json({data:"Success"})
 
     
 

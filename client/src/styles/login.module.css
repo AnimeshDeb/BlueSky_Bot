@@ -11,6 +11,7 @@
 }
 
 .login_right {
+  
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -38,6 +39,7 @@
 }
 .login_right input {
   /* width: 100%; */
+  color:black;
   height: 50px;
   border-radius: 10px;
   background-color: #f8f9fa;
