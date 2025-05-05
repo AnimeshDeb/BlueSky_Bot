@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import PasswordIncorrect from '../Components/passwordIncorrect';
 import loginStyles from '../styles/login.module.css';
-import loginImg from '../images/loginImg2.jpg';
+import loginImg from '../images/login.jpg';
 // import Cookies from 'js-cookie'
 function Login() {
   const [email, setEmail] = useState('');

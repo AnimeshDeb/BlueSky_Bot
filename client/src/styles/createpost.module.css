@@ -48,7 +48,7 @@ input:focus {
   background-color: #c8faf0;
   color: black;
   font-size: 20px;
-  border-radius: 25px;
+  border-radius: 15px;
   resize: vertical;
   padding-left: 10px;
 }
@@ -68,7 +68,7 @@ textarea:focus {
 
 .submitButton {
   width: 100%;
-  background-color: #6c5b7b;
+  background-color: #FF6B81;
 }
 .submitButton:focus {
   outline: none;
@@ -149,4 +149,16 @@ textarea:focus {
 }
 .postHeader{
   width:100vw;
+}
+
+@media(max-width:1300px){
+  .information{
+    padding-bottom: 20px;
+    background-color: blueviolet;
+    
+  }
+  .container{
+    resize: vertical;
+  }
+ 
 }

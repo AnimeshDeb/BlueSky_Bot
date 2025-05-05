@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import styles from '../styles/posts.module.css'
+import styles from '../styles/posts.module.css';
 function Posts() {
   const [posts, setPosts] = useState([]);
   const [isDeleteVisible, setisDeleteVisible] = useState(false);
   const [isEditVisible, setisEditVisible] = useState(false);
   const [isFinishEditVisible, setisFinishEditVisible] = useState(false);
   const [inputValue, setInputValue] = useState('');
-  const [inputMessageID, setInputMessageID]=useState(null)
+  const [inputMessageID, setInputMessageID] = useState(null);
   const [reload, setReload] = useState(false);
   useEffect(() => {
     async function fetchPost() {
@@ -52,7 +52,7 @@ function Posts() {
     // setInputMessageID(' ')
     setisEditVisible(false);
     setisFinishEditVisible(true);
-    console.log("userID: ", inputMessageID)
+    console.log('userID: ', inputMessageID);
     const response = await fetch(
       `http://localhost:3000/getPostInfo?userID=${inputMessageID}`,
       {
@@ -67,33 +67,43 @@ function Posts() {
     const data = await response.json();
     // console.log("data.textfield: ", data.data)
     setInputValue(data.data);
-    console.log("frst edit: ", data.data)
-    
+    console.log('frst edit: ', data.data);
+
     setisEditVisible(false); // close the popup
-   
+
     // setReload((prev) => !prev); //reloads components to trigger useEffect
   };
-  const handleFinishEdit=async ()=>{
-    const response=await fetch('http://localhost:3000/editPost',{
+  const handleFinishEdit = async () => {
+    const response = await fetch('http://localhost:3000/editPost', {
       method: 'POST',
-      headers:{'Content-Type':'application/json',},
-      body:JSON.stringify({userID: inputMessageID, userText: inputValue}),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userID: inputMessageID, userText: inputValue }),
       credentials: 'include',
-    })
-    const data=await response.json()
-    setisFinishEditVisible(false)
-    
-    setReload((prev) => !prev)
-    setInputMessageID(null)
-    console.log("edit data ", data.data)
-  }
+    });
+    const data = await response.json();
+    setisFinishEditVisible(false);
+
+    setReload((prev) => !prev);
+    setInputMessageID(null);
+    console.log('edit data ', data.data);
+  };
 
   return (
     <div className={styles.container}>
       <div className={styles.buttonContainer}>
         <div className={styles.btnContainer}>
-          <button onClick={() => setisDeleteVisible(true)}>Delete</button>
-          <button onClick={() => setisEditVisible(true)}>Edit</button>
+          <button
+            className={styles.btnn}
+            onClick={() => setisDeleteVisible(true)}
+          >
+            Delete
+          </button>
+          <button
+            className={styles.btnn}
+            onClick={() => setisEditVisible(true)}
+          >
+            Edit
+          </button>
         </div>
         {/* edit  */}
         <div className={styles.deleteVisible}>
@@ -113,12 +123,15 @@ function Posts() {
                 </div>
 
                 <input
+                  className={styles.postsInput}
                   type="text"
                   placeholder="Enter message ID..."
                   value={inputMessageID}
                   onChange={(e) => setInputMessageID(e.target.value)}
                 />
-                <button onClick={handleEdit}>Edit</button>
+                <button className={styles.delEdit} onClick={handleEdit}>
+                  Edit
+                </button>
               </div>
             </div>
           )}
@@ -136,16 +149,18 @@ function Posts() {
                     </button>
                   </div>
                 </div>
-                <div className={styles.inputHeader}>
-                  <p>Edit Post:</p>
-                  <input
-                    type="text"
-                    placeholder="Edit Post..."
-                    value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
-                  />
+                <div className={styles.nextEditDel}>
+                  <div className={styles.inputHeader}>
+                    <p>Edit Post:</p>
+                    <input
+                      type="text"
+                      placeholder="Edit Post..."
+                      value={inputValue}
+                      onChange={(e) => setInputValue(e.target.value)}
+                    />
+                  </div>
+                  <button onClick={handleFinishEdit}>Finish Editing</button>
                 </div>
-                <button onClick={handleFinishEdit}>Finish Editing</button>
               </div>
             </div>
           )}
@@ -166,14 +181,17 @@ function Posts() {
                     </button>
                   </div>
                 </div>
-
-                <input
-                  type="text"
-                  placeholder="Enter message ID..."
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
-                />
-                <button onClick={handleDelete}>Delete</button>
+                <div className={styles.nextEditDel}>
+                  <input
+                    type="text"
+                    placeholder="Enter message ID..."
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                  />
+                  <button className={styles.delEdit} onClick={handleDelete}>
+                    Delete
+                  </button>
+                </div>
               </div>
             </div>
           )}
