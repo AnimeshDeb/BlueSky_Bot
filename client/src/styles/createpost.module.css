@@ -22,7 +22,8 @@
   height: auto;
   gap: 20px;
   border-radius: 25px;
-  background-color: #c8d7fa;
+  /* background-color: #c8d7fa; */
+  outline:solid;
   padding-left: 20px;
   padding-right: 23px;
   min-width: 800px;
@@ -45,7 +46,8 @@ input:focus {
   width: 99%;
   height: 99%;
   /* background-color:  #f8f9fa; */
-  background-color: #c8faf0;
+  /* background-color: #c8faf0; */
+  background-color: #f8f9fa;
   color: black;
   font-size: 20px;
   border-radius: 15px;
@@ -64,8 +66,16 @@ textarea:focus {
   gap: 20px;
   margin-left: 20px;
   margin-left: 15px;
-}
 
+}
+.clock_btn{
+  outline: solid;
+  border-radius: 25px;
+  height:150px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  
+}
 .submitButton {
   width: 100%;
   background-color: #FF6B81;
@@ -81,7 +91,8 @@ textarea:focus {
   
 }
 .calander {
-  background-color: #fbdceb;
+  /* background-color: #fbdceb; */
+  outline: solid;
   width: 100%;
   height: 100%;
   border-radius: 25px;
@@ -150,11 +161,18 @@ textarea:focus {
 .postHeader{
   width:100vw;
 }
+.imgLink{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 5px;
+  width:100vw;
+}
 
 @media(max-width:1300px){
   .information{
     padding-bottom: 20px;
-    background-color: blueviolet;
+   
     
   }
   .container{

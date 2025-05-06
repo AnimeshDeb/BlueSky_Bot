@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/signup.css';
 import { Link } from 'react-router-dom';
 import successImg from '../images/success.jpg';
+import FooterSignup from '../Components/footerSignup';
 function Signup() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
@@ -77,49 +78,56 @@ function Signup() {
   };
 
   return (
-    <div className="container">
-      <div className="login-left-image">
-        <div className="login-left">
-         <span> Plan, schedule, grow. </span> <span>On Your Terms.</span>
-        </div>
-        <img src={successImg} alt="Success Image" className="successImg" />
+    <div className="container_footer">
+      <div className="signupLink">
+        <div><a href='https://www.freepik.com/free-vector/achievement-concept-illustration_13416116.htm#fromView=search&page=1&position=22&uuid=51f6b490-cbe6-4524-bfa9-b6bbd988309f&query=success+cartoon' target="_blank" >Signup image attribution link</a></div>
       </div>
-      <div className="login-right-container">
-        <div className="login-right">
-          <div className="login-header">
-            <h1>Signup</h1>
-            <p>
-              Have an account? <Link to="/login">Login</Link>{' '}
-            </p>
+      <div className="container">
+        <div className="login-left-image">
+          <div className="login-left">
+            <span> Plan, schedule, grow. </span> <span>On Your Terms.</span>
           </div>
-          <div className="email-password">
-            Email:
-            <input
-              type="text"
-              placeholder="Email"
-              value={email}
-              onChange={handleEmailChange}
-            />
-            Password:
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={handlePasswordChange}
-            />
-            Confirm Password:
-            <input
-              type="password"
-              placeholder="Confirm Password"
-              value={confirmPassword}
-              onChange={handleConfirmPasswordChange}
-            />
-            <button className='signupBtn' onClick={handleSubmit}>Signup</button>
-          </div>
+          <img src={successImg} alt="Success Image" className="successImg" />
         </div>
-        {passRequirementsVisible && <PasswordRequirements />}
-        {visible && <PasswordMatch />}
-        {emailValidVisible && <EmailExists />}
+        <div className="login-right-container">
+          <div className="login-right">
+            <div className="login-header">
+              <h1>Signup</h1>
+              <p>
+                Have an account? <Link to="/login">Login</Link>
+              </p>
+            </div>
+            <div className="email-password">
+              Email:
+              <input
+                type="text"
+                placeholder="Email"
+                value={email}
+                onChange={handleEmailChange}
+              />
+              Password:
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={handlePasswordChange}
+              />
+              Confirm Password:
+              <input
+                type="password"
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onChange={handleConfirmPasswordChange}
+              />
+              <button className="signupBtn" onClick={handleSubmit}>
+                Signup
+              </button>
+            </div>
+          </div>
+          {passRequirementsVisible && <PasswordRequirements />}
+          {visible && <PasswordMatch />}
+          {emailValidVisible && <EmailExists />}
+        </div>
       </div>
     </div>
   );

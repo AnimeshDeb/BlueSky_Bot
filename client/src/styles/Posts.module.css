@@ -27,6 +27,9 @@ body {
     display: flex;
     gap: 10px;
   }
+  .btnContainer button:focus{
+    outline:none;
+  }
   
   button {
     background-color: #007bff;

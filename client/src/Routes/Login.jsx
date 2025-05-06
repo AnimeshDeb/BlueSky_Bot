@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import PasswordIncorrect from '../Components/passwordIncorrect';
 import loginStyles from '../styles/login.module.css';
 import loginImg from '../images/login.jpg';
+import FooterLogin from '../Components/footerLogin';
 // import Cookies from 'js-cookie'
 function Login() {
   const [email, setEmail] = useState('');
@@ -47,23 +48,35 @@ function Login() {
   };
 
   return (
-    <div className={loginStyles.container}>
-      <div className={loginStyles.login_left}>
-        <div className={loginStyles.loginTitle}>
-          <h1>Never Miss a Post Again.</h1>
-          <p>
-            Plan, schedule, and boost your presence on Bluesky automatically.
-          </p>
+    <div className={loginStyles.container_footer}>
+      <div className={loginStyles.imgLink}>
+        <div>
+          <a href="https://www.freepik.com/free-vector/time-management-concept-illustration_358253409.htm#fromView=search&page=1&position=19&uuid=30144b43-ebe1-4fc0-9bf5-b0f914957b1f&query=productivity+cartoon" target="_blank">
+            Login page image attribution link
+          </a>
         </div>
-        <div className={loginStyles.loginImg}>
-          <img
-            src={loginImg}
-            alt="Login Image"
-            className={loginStyles.loginImage}
-          />
-        </div>
+      </div>
+      <div className={loginStyles.container}>
+        <div className={loginStyles.login_left}>
+          <div className={loginStyles.loginTitle}>
+            <h1>Never Miss a Post Again.</h1>
+            <p>
+              Plan, schedule, and boost your presence on Bluesky automatically.
+            </p>
+          </div>
+          <div className={loginStyles.loginImg}>
+            {/* <div className="imgLink">
+              <p>Hello</p>
+            </div> */}
 
-        {/* 
+            <img
+              src={loginImg}
+              alt="Login Image"
+              className={loginStyles.loginImage}
+            />
+          </div>
+
+          {/* 
         <div className={loginStyles.image}>
           <img
             src={loginImg}
@@ -71,37 +84,39 @@ function Login() {
             className={loginStyles.loginImage}
           />
         </div> */}
-      </div>
-      <div className={loginStyles.login_right_container}>
-        <div className={loginStyles.login_right}>
-          <div className={loginStyles.login_header}>
-            <h1>Login</h1>
-            <p>
-              Don't have an account? <Link to="/signup">Sign Up</Link>
-            </p>
-          </div>
-          <div className={loginStyles.email_password}>
-            <label htmlFor="emailLabel">Email:</label>
-            <input
-              type="text"
-              placeholder="Email"
-              value={email}
-              onChange={handleEmailChange}
-            />
-            <label htmlFor="passwordLabel">Password:</label>
+        </div>
+        <div className={loginStyles.login_right_container}>
+          <div className={loginStyles.login_right}>
+            <div className={loginStyles.login_header}>
+              <h1>Login</h1>
+              <p>
+                Don't have an account? <Link to="/signup">Sign Up</Link>
+              </p>
+            </div>
+            <div className={loginStyles.email_password}>
+              <label htmlFor="emailLabel">Email:</label>
+              <input
+                type="text"
+                placeholder="Email"
+                value={email}
+                onChange={handleEmailChange}
+              />
+              <label htmlFor="passwordLabel">Password:</label>
 
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={handlePasswordChange}
-            />
-          </div>
-          {passwordIncorrect && <PasswordIncorrect />}
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={handlePasswordChange}
+              />
+            </div>
+            {passwordIncorrect && <PasswordIncorrect />}
 
-          <button onClick={handleSubmit}>Login</button>
+            <button onClick={handleSubmit}>Login</button>
+          </div>
         </div>
       </div>
+      {/* <FooterLogin/> */}
     </div>
   );
 }

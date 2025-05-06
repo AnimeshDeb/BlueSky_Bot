@@ -6,7 +6,9 @@ import homeStyles from '../styles/createpost.module.css';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import logout from '../images/logout.png';
-import save from '../images/bookmark.png'
+import save from '../images/bookmark.png';
+import saveicon from '../images/saveicon.png'
+import FooterHome from '../Components/footerHome';
 
 function HomeComponent() {
   const [text, setText] = useState('');
@@ -140,21 +142,42 @@ function HomeComponent() {
                   shouldDisableDate={(date) => date.isBefore(moment(), 'day')}
                 />
               </div>
-              <div className={homeStyles.clock}>
-                <TimePicker
-                  value={clockTime}
-                  onChange={handleChangeClock}
-                  label="Choose a time"
-                />
-              </div>
+              <div className={homeStyles.clock_btn}>
+                <div className={homeStyles.clock}>
+                  <TimePicker
+                    value={clockTime}
+                    onChange={handleChangeClock}
+                    label="Choose a time"
+                  />
+                </div>
 
-              <button
-                className={homeStyles.submitButton}
-                onClick={handleSubmit}
-              >
-                Schedule Post
-              </button>
+                <button
+                  className={homeStyles.submitButton}
+                  onClick={handleSubmit}
+                >
+                  Schedule Post
+                </button>
+              </div>
             </div>
+          </div>
+
+          <div className={homeStyles.imgLink}>
+            <p>Posts and Logout Icon attribution links: </p>
+            <a
+              href="https://www.flaticon.com/free-icon/save-instagram_5662990?term=save&page=1&position=3&origin=tag&related_id=5662990"
+              target="_blank"
+              title="save icons"
+            >
+              Save icons created by Freepik - Flaticon
+            </a>
+
+            <a
+              href="https://www.flaticon.com/free-icons/logout"
+              target="_blank"
+              title="logout icons"
+            >
+              Logout icons created by deemakdaksina - Flaticon
+            </a>
           </div>
         </div>
       )}

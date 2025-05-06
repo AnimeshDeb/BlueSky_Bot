@@ -6,7 +6,16 @@
   justify-content: center;
   align-items: center;
   gap: 70px;
+  margin-top: -20px;
   overflow: hidden;
+}
+.signupLink{
+  width:100vw;
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 5px;
+  font-size: 13px;
+
 }
 .login-left {
   width: 50%;
@@ -29,9 +38,7 @@
   
   margin-right: 7%;
 }
-.login-header p{
-    /* margin-top: -5%; */
-}
+
 .login-right {
   display: flex;
   flex-direction: column;
@@ -95,7 +102,7 @@ input {
     /* margin-top: 16%; */
     width:50%;
     height:60%;
-    margin-left: 35px;
+    margin-right: 25px;
 }
 span{
     display: inline;
