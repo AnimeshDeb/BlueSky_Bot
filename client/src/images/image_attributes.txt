@@ -9,3 +9,5 @@ Home page posts icon:
 Home page logout icon:
 <a href="https://www.flaticon.com/free-icons/logout" title="logout icons">Logout icons created by deemakdaksina - Flaticon</a>
 
+Signup page image:
+https://www.freepik.com/free-vector/achievement-concept-illustration_13416116.htm#fromView=search&page=1&position=22&uuid=51f6b490-cbe6-4524-bfa9-b6bbd988309f&query=success+cartoon

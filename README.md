@@ -6,6 +6,6 @@ To create a full-stack web application for the Bluesky social media that can all
 ### Current Status (5/4/2025)
 - Server/ Backend coding done.
 - Redoing styles for website.
-- Styling for posts page done.
+- Styling for signup page done.
 
 
