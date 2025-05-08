@@ -7,6 +7,7 @@ import Home from './Routes/Home';
 import Routeguard from './Routeguard/Routeguard';
 import Posts from './Routes/Posts';
 import HomeComponent from './Routes/homeComponent'
+import ForgotPassword from './Routes/forgotPassword';
 function App() {
   return (
     <Routes>
@@ -17,6 +18,7 @@ function App() {
 
       {/* <Route path="/home" element={<Routeguard><Home /> </Routeguard>} /> */}
       <Route path="/posts" element={<Routeguard><Posts/></Routeguard>} />
+      <Route path="/forgotPassword" element={<ForgotPassword/>}/>
     </Routes>
   );
 }

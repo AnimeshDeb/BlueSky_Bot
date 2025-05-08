@@ -51,7 +51,10 @@ function Login() {
     <div className={loginStyles.container_footer}>
       <div className={loginStyles.imgLink}>
         <div>
-          <a href="https://www.freepik.com/free-vector/time-management-concept-illustration_358253409.htm#fromView=search&page=1&position=19&uuid=30144b43-ebe1-4fc0-9bf5-b0f914957b1f&query=productivity+cartoon" target="_blank">
+          <a
+            href="https://www.freepik.com/free-vector/time-management-concept-illustration_358253409.htm#fromView=search&page=1&position=19&uuid=30144b43-ebe1-4fc0-9bf5-b0f914957b1f&query=productivity+cartoon"
+            target="_blank"
+          >
             Login page image attribution link
           </a>
         </div>
@@ -101,8 +104,11 @@ function Login() {
                 value={email}
                 onChange={handleEmailChange}
               />
-              <label htmlFor="passwordLabel">Password:</label>
-
+              <div className={loginStyles.forgotPassword}>
+                
+                <label htmlFor="passwordLabel">Password:</label>
+                <Link to="/forgotPassword">Forgot Password?</Link>
+              </div>
               <input
                 type="password"
                 placeholder="Password"

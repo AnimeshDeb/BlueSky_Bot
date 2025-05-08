@@ -121,7 +121,11 @@ input {
 .login_right button:focus{
   outline: none;
 }
-
+.forgotPassword{
+  display: flex;
+  gap:130px;
+  flex-direction: row !important;
+}
 /* .loginImage{
     width:100%;
     height:auto;
