@@ -1,19 +1,26 @@
 import cron from 'node-cron';
 import mongoose from 'mongoose';
-import PostModel from '../Schema/Posts/post.js';
 import dotenv from 'dotenv';
-import express from 'express';
-import {AtpAgent} from '@atproto/api'
-import axios from 'axios'
+import PostModel from '../Schema/Posts/post.js';
+import { AtpAgent } from '@atproto/api';
 
-dotenv.config(); 
+dotenv.config();
 
-async function processPosts(email, postToPlatform) {
+
+async function postToPlatform({ text, username, password }) {
   try {
+    const agent = new AtpAgent({ service: 'https://bsky.social' });
+    await agent.login({ identifier: username, password });
+    await agent.post({ text, createdAt: new Date().toISOString() });
+    console.log('Posted:', text);
+  } catch (err) {
+    console.error(`Failed to post for ${username}:`, err.message);
+  }
+}
 
-    await mongoose.connect(
-      "CONNECTION_STRING"
-    );
+async function processAllPosts() {
+  try {
+    await mongoose.connect(process.env.CONNECTION_STRING);
 
     const now = new Date();
     const formattedTime = now.toLocaleTimeString('en-US', {
@@ -28,94 +35,38 @@ async function processPosts(email, postToPlatform) {
         year: 'numeric',
       })
       .replace(/\//g, '-');
-    console.log('Email ', email);
-    console.log('date', formattedDate);
-    console.log('time ', formattedTime);
-    
-    console.log(
-      `Checking for posts scheduled at ${formattedDate} ${formattedTime}...`
-    );
 
-    // Find posts that need to be posted now
+    console.log(`Checking posts scheduled at ${formattedDate} ${formattedTime}`);
 
-    
-    const postsToProcess = await PostModel.findOne()
-      .where("email").equals(email)
-      
-      .select("post.text post.username post.password post.time post.calendar -_id")
-    console.log('post dictionary array: ', postsToProcess.post);
+    const allUsers = await PostModel.find({}).select('email post');
 
-    let postingArray=[]
-    for (let i=0;i<postsToProcess.post.length;i++)
-    {
-      if (postsToProcess.post[i].calendar==formattedDate && postsToProcess.post[i].time==formattedTime)
-      {
-        postingArray.push({username: postsToProcess.post[i].username, password: postsToProcess.post[i].password, text: postsToProcess.post[i].text})
-      }
-    }
-    
-    if (!postsToProcess) {
-      console.log('No posts at this time');
-    }
-    if (postsToProcess && postingArray.length > 0) {
-      
-      for (const post of postingArray) {
-        
+    for (const user of allUsers) {
+      const scheduledPosts = user.post.filter(
+        (p) => p.calendar === formattedDate && p.time === formattedTime
+      );
 
-        console.log(`Posting: ${post.text}`);
-
-        
+      for (const post of scheduledPosts) {
         await postToPlatform(post);
 
-        await PostModel.findOneAndUpdate(
-          { email: postsToProcess.email }, 
+       
+        await PostModel.updateOne(
+          { email: user.email },
           { $pull: { post: { _id: post._id } } }
         );
       }
-    } else {
-      console.log('No posts to process at this time.');
     }
 
-    // Disconnect from MongoDB
     mongoose.disconnect();
-  } catch (error) {
-    console.error('Error processing posts:', error);
+  } catch (err) {
+    console.error('Error processing posts:', err.message);
   }
 }
 
-export default async function runProcess(email) {
-  console.log('running process ... ');
-  console.log('Email running process is: ', email);
 
-  // Function to post to Bluesky
-  async function postToPlatform(post) {
-
-    const agent=new AtpAgent({service:'https://bsky.social'})
-    const bluesky_handle=post.username
-    const bluesky_password=post.password 
-
-    async function login(){
-      const agentPost= await agent.login({identifier:bluesky_handle, password:bluesky_password})
-      await agent.post({text:post.text, createdAt: new Date().toISOString()})
-      console.log("Posted: ", post.text)
-
-      console.log('Access token: ', agent.session.accessJwt)
-    }
-    login()
-   
-    
-    
-  }
-
-  // processPosts()
-  // Schedule cron job to run every 5 minutes
+export default function startCronJob() {
+  console.log('Starting global cron job...');
   cron.schedule('*/5 * * * *', () => {
-    console.log('Running cron job...');
-    processPosts(email, postToPlatform);
+    console.log('Cron triggered...');
+    processAllPosts();
   });
-
-  // Keep the script running
-  console.log('Cron job script started.');
 }
-
-

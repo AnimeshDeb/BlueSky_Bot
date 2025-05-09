@@ -161,10 +161,18 @@ textarea:focus {
 .postHeader{
   width:100vw;
 }
+
+.imgLink p{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
 .imgLink{
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   text-align: left;
   margin-left: 5px;
   width:100vw;

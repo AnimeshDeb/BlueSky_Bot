@@ -17,8 +17,10 @@ function Posts() {
           credentials: 'include',
         });
         const data = await response.json();
-        console.log('clientside data ', data.data);
-        setPosts(data.data || []); // Ensure it's an array
+        if(data.data=='Empty'){
+          return;
+        }
+        setPosts(data.data || []); 
       } catch (error) {
         console.error('Error fetching posts:', error);
       }
@@ -27,7 +29,6 @@ function Posts() {
   }, [reload]);
 
   const handleDelete = async () => {
-    console.log('Submitted value:', inputValue);
     const response = await fetch('http://localhost:3000/deletePost', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -67,7 +68,6 @@ function Posts() {
     const data = await response.json();
     // console.log("data.textfield: ", data.data)
     setInputValue(data.data);
-    console.log('frst edit: ', data.data);
 
     setisEditVisible(false); // close the popup
 

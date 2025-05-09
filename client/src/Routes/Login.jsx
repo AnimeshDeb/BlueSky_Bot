@@ -3,7 +3,6 @@ import { useNavigate, Link } from 'react-router-dom';
 import PasswordIncorrect from '../Components/passwordIncorrect';
 import loginStyles from '../styles/login.module.css';
 import loginImg from '../images/login.jpg';
-import FooterLogin from '../Components/footerLogin';
 // import Cookies from 'js-cookie'
 function Login() {
   const [email, setEmail] = useState('');
@@ -37,7 +36,6 @@ function Login() {
         }
       );
       const dataConfirm = await responseConfirm.json();
-      console.log('dataconfirm data: ', dataConfirm);
       if (dataConfirm.authenticated) {
         setPasswordIncorrect(false);
         navigate('/home');
@@ -104,11 +102,11 @@ function Login() {
                 value={email}
                 onChange={handleEmailChange}
               />
-              <div className={loginStyles.forgotPassword}>
+              
                 
                 <label htmlFor="passwordLabel">Password:</label>
-                <Link to="/forgotPassword">Forgot Password?</Link>
-              </div>
+                
+            
               <input
                 type="password"
                 placeholder="Password"
@@ -119,6 +117,9 @@ function Login() {
             {passwordIncorrect && <PasswordIncorrect />}
 
             <button onClick={handleSubmit}>Login</button>
+            <div className={loginStyles.forgotPassword}>
+            <Link to="/forgotPassword">Forgot Password?</Link>
+            </div>
           </div>
         </div>
       </div>

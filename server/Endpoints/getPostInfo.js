@@ -18,38 +18,33 @@ router.get('/', verify, async (req, res) => {
         { email, 'post._id': messageID },
         { 'post.$': 1 }
       );
-      const textField = query.post[0].text;
+      const textField = query?.post?.[0]?.text || '';
       console.log('textField ', textField);
+      if (textField.length === 0) {
+        return res.json({ data: 'Empty' });
+      }
       return res.json({ data: textField });
-      // console.log("QUERYPOST: ", query.post[0].text)
     } else {
-      const query = await PostModel.findOne({ email: email });
-      // if(!query){
-      //     return res.json({data:"NULL"})
-      // }
-
-      const textFields = query.post.map((item) => ({
+      const query = await PostModel.findOne({ email });
+      const textFields = query?.post?.map((item) => ({
         text: item.text,
         calendar: item.calendar,
         time: item.time,
         _id: item._id.toString(),
-      }));
+      })) || [];
 
-      // const text=query.post[0].text
-      // const username=query.post[0].username
-      // const password=query.post[0].password
-      // const calendar=query.post[0].calendar
-      // const time=query.post[0].time
+      if (textFields.length === 0) {
+        return res.json({ data: 'Empty' });
+      }
 
-      res.json({ data: textFields });
+      return res.json({ data: textFields });
     }
   } catch (error) {
     console.error(error);
+    return res.status(500).json({ error: 'Internal server error' });
+  } finally {
+    await mongoose.disconnect();
   }
-  //querying for a document containing the user email, where the specific id field
-  // of the post[] is the id of the component we are considering in the frontend.
-
-  await mongoose.disconnect();
 });
 
 export default router;

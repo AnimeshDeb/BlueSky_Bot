@@ -13,8 +13,10 @@ import logout from './Endpoints/logout.js'
 import emailService from './Endpoints/verificationCode.js'
 import codecheck from './Endpoints/codeCheck.js'
 import resetPassword from './Endpoints/resetPassword.js'
-// import ProcessPost from './scripts/cronjob.js'
+import startCronJob from './scripts/cronjob.js'
+
 const app=express()
+startCronJob()
 
 app.use(cors({
   origin:'http://localhost:5173',

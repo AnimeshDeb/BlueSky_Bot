@@ -12,12 +12,11 @@ router.post('/', async (req, res) => {
   const codeExpire = await VerificationCodeModel.findOne({ email: email });
   if (codeExpire) {
     mongoose.disconnect();
-
+    
     return res.json({ data: 'Not Expire' });
   }
 
   mongoose.disconnect();
-  console.log("User is expired")
   return res.json({ data: 'Expired' });
 });
 

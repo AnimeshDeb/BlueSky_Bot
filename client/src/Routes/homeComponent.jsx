@@ -21,7 +21,6 @@ function HomeComponent() {
 
   const handleChangeText = (event) => {
     setText(event.target.value);
-    console.log(text);
   };
 
   const handleChangeUsername = (event) => {
@@ -40,8 +39,7 @@ function HomeComponent() {
   const handleSubmit = async () => {
     setLoading(true);
 
-    //another method of convertng time state vs useEffect as above:
-    //can't directly format the clock and time states as they are initialized to moment() (can't do setClockTime(newValue.format("h:mm A"))), so we do:
+    
     const formmattedTime = clockTime.format('h:mm A');
     const formattedDate = calDate.format('MM-DD-YYYY');
 
