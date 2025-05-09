@@ -11,6 +11,8 @@ import saveicon from '../images/saveicon.png'
 import FooterHome from '../Components/footerHome';
 
 function HomeComponent() {
+  const apiUrl = import.meta.env.VITE_URL
+
   const [text, setText] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -43,7 +45,7 @@ function HomeComponent() {
     const formmattedTime = clockTime.format('h:mm A');
     const formattedDate = calDate.format('MM-DD-YYYY');
 
-    const response = await fetch('http://localhost:3000/makePost', {
+    const response = await fetch(`${apiUrl}/makePost`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -65,7 +67,7 @@ function HomeComponent() {
     }
   };
   const handleLogout = async () => {
-    const response = await fetch('http://localhost:3000/logout', {
+    const response = await fetch(`${apiUrl}/logout`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

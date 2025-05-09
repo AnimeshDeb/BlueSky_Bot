@@ -6,15 +6,16 @@ import { AtpAgent } from '@atproto/api';
 
 dotenv.config();
 
-
 async function postToPlatform({ text, username, password }) {
   try {
     const agent = new AtpAgent({ service: 'https://bsky.social' });
     await agent.login({ identifier: username, password });
     await agent.post({ text, createdAt: new Date().toISOString() });
     console.log('Posted:', text);
+    return true; // Indicate success
   } catch (err) {
     console.error(`Failed to post for ${username}:`, err.message);
+    return false; // Indicate failure
   }
 }
 
@@ -46,22 +47,24 @@ async function processAllPosts() {
       );
 
       for (const post of scheduledPosts) {
-        await postToPlatform(post);
+        const success = await postToPlatform(post);
 
-       
-        await PostModel.updateOne(
-          { email: user.email },
-          { $pull: { post: { _id: post._id } } }
-        );
+        if (success) {
+          await PostModel.updateOne(
+            { email: user.email },
+            { $pull: { post: { _id: post._id } } }
+          );
+        } else {
+          console.log(`Skipped deleting post for ${user.email} due to failure.`);
+        }
       }
     }
 
-    mongoose.disconnect();
+    await mongoose.disconnect();
   } catch (err) {
     console.error('Error processing posts:', err.message);
   }
 }
-
 
 export default function startCronJob() {
   console.log('Starting global cron job...');

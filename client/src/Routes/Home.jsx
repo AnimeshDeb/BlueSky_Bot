@@ -5,9 +5,9 @@ import '../styles/userhome.module.css'
 function Home() {
   const navigate=useNavigate();
   const [renderSwitch, setRenderSwitch] = useState(0);
-
+const apiUrl = import.meta.env.VITE_URL
   const handleLogout=async ()=>{
-    const response= await fetch("http://localhost:3000/logout",{
+    const response= await fetch(`${apiUrl}/logout`,{
       method:'GET',
       headers:{
         'Content-Type':'application/json',

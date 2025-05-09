@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import successImg from '../images/success.jpg';
 import FooterSignup from '../Components/footerSignup';
 function Signup() {
+  const apiUrl=import.meta.env.VITE_URL
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -56,7 +57,7 @@ function Signup() {
       if (password === confirmPassword && passwordValid === true) {
         setVisible(false);
         setPassRequirmentsVisible(false);
-        const response = await fetch('http://localhost:3000/signup', {
+        const response = await fetch(`${apiUrl}/signup`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

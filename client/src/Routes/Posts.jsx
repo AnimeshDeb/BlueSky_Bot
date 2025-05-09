@@ -8,10 +8,13 @@ function Posts() {
   const [inputValue, setInputValue] = useState('');
   const [inputMessageID, setInputMessageID] = useState(null);
   const [reload, setReload] = useState(false);
+
+  const apiUrl=import.meta.env.VITE_URL
+
   useEffect(() => {
     async function fetchPost() {
       try {
-        const response = await fetch('http://localhost:3000/getPostInfo', {
+        const response = await fetch(`${apiUrl}/getPostInfo`, {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
           credentials: 'include',
@@ -29,7 +32,7 @@ function Posts() {
   }, [reload]);
 
   const handleDelete = async () => {
-    const response = await fetch('http://localhost:3000/deletePost', {
+    const response = await fetch(`${apiUrl}/deletePost`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ messageID: inputValue }),
@@ -55,7 +58,7 @@ function Posts() {
     setisFinishEditVisible(true);
     console.log('userID: ', inputMessageID);
     const response = await fetch(
-      `http://localhost:3000/getPostInfo?userID=${inputMessageID}`,
+      `${apiUrl}/getPostInfo?userID=${inputMessageID}`,
       {
         method: 'GET',
         headers: {
@@ -74,7 +77,7 @@ function Posts() {
     // setReload((prev) => !prev); //reloads components to trigger useEffect
   };
   const handleFinishEdit = async () => {
-    const response = await fetch('http://localhost:3000/editPost', {
+    const response = await fetch(`${apiUrl}/editPost`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ userID: inputMessageID, userText: inputValue }),

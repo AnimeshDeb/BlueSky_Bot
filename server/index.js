@@ -14,7 +14,7 @@ import emailService from './Endpoints/verificationCode.js'
 import codecheck from './Endpoints/codeCheck.js'
 import resetPassword from './Endpoints/resetPassword.js'
 import startCronJob from './scripts/cronjob.js'
-
+import dotenv from 'dotenv'
 const app=express()
 startCronJob()
 
@@ -23,6 +23,9 @@ app.use(cors({
   credentials:true,
 }))
 
+dotenv.config()
+
+const PORT=process.env.SERVER_URL
 app.use(express.json())
 app.use(cookieParser())
 app.get('/',(req,res)=>{
@@ -41,7 +44,7 @@ app.use('/emailService', emailService)
 app.use('/codeCheck', codecheck)
 app.use('/resetPassword', resetPassword)
 // app.use('/pp', ProcessPost)
-app.listen(3000,()=>{
+app.listen(PORT,()=>{
   console.log('Server running on port 3000')
 })
 

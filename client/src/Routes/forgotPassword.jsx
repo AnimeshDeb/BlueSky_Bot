@@ -14,6 +14,9 @@ export default function ForgotPassword() {
   const [validPassword, setValidPassword]=useState(false)
   const [isdisabled, setIsDisabled]=useState(false)
 
+
+  const apiUrl=import.meta.env.VITE_URL
+
   useEffect(() => {
     const isEmailValid = email.trim() !== '';
     const isCodeValid = userEnteredCode.trim() !== '';
@@ -39,7 +42,7 @@ export default function ForgotPassword() {
 
   const handleSubmit = async () => {
     
-    const response = await fetch('http://localhost:3000/emailService', {
+    const response = await fetch(`${apiUrl}/emailService`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -68,7 +71,7 @@ export default function ForgotPassword() {
   
     setValidPassword(false); 
   
-    const response = await fetch('http://localhost:3000/resetPassword', {
+    const response = await fetch(`${apiUrl}/resetPassword`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

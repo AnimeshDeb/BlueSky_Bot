@@ -5,6 +5,7 @@ import loginStyles from '../styles/login.module.css';
 import loginImg from '../images/login.jpg';
 // import Cookies from 'js-cookie'
 function Login() {
+  const apiUrl=import.meta.env.VITE_URL
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordIncorrect, setPasswordIncorrect] = useState(false);
@@ -20,7 +21,7 @@ function Login() {
 
   const handleSubmit = async () => {
     try {
-      await fetch('http://localhost:3000/login', {
+      await fetch(`${apiUrl}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -30,7 +31,7 @@ function Login() {
       });
 
       const responseConfirm = await fetch(
-        'http://localhost:3000/confirmToken',
+        `${apiUrl}/confirmToken`,
         {
           credentials: 'include',
         }

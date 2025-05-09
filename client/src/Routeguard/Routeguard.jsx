@@ -7,11 +7,11 @@ function Routeguard({children})//children refers to the components surrounded by
     
     // const [result, setResult]=useState(null)
     const navigate=useNavigate()
-
+    const apiUrl=import.meta.env.VITE_URL
     useEffect(()=>{
         const checker=async()=>{
             try{
-                const response=await fetch('http://localhost:3000/confirmToken',{
+                const response=await fetch(`${apiUrl}/confirmToken`,{
                     credentials:'include',
                 })
                 const data=await response.json()
