@@ -5,7 +5,6 @@
   justify-content: center;
   font-size: 20px;
   color: black;
- 
 }
 
 .information_sub {
@@ -13,7 +12,6 @@
   gap: 20px;
   color: black;
   height: auto;
-  
 }
 .information {
   display: flex;
@@ -23,7 +21,7 @@
   gap: 20px;
   border-radius: 25px;
   /* background-color: #c8d7fa; */
-  outline:solid;
+  outline: solid;
   padding-left: 20px;
   padding-right: 23px;
   min-width: 800px;
@@ -66,19 +64,17 @@ textarea:focus {
   gap: 20px;
   margin-left: 20px;
   margin-left: 15px;
-
 }
-.clock_btn{
+.clock_btn {
   outline: solid;
   border-radius: 25px;
-  height:150px;
+  height: 150px;
   padding-top: 20px;
   padding-bottom: 20px;
-  
 }
 .submitButton {
   width: 100%;
-  background-color: #FF6B81;
+  background-color: #ff6b81;
 }
 .submitButton:focus {
   outline: none;
@@ -88,7 +84,6 @@ textarea:focus {
   width: 100%;
   justify-content: space-around;
   align-items: center;
-  
 }
 .calander {
   /* background-color: #fbdceb; */
@@ -108,7 +103,6 @@ textarea:focus {
   display: flex;
   justify-content: center;
   align-items: center;
-  
 }
 .navigationPosts {
   display: flex;
@@ -140,7 +134,7 @@ textarea:focus {
   left: 0;
   width: 0%;
   height: 2px;
-  background-color: #FF6B81; /* reddish-pink */
+  background-color: #ff6b81; /* reddish-pink */
   transition: width 0.3s ease-in-out;
 }
 
@@ -150,42 +144,57 @@ textarea:focus {
   width: 100%;
 }
 
-.navigationParent{
+.navigationParent {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap:50px;
+  gap: 50px;
   margin-bottom: 5%;
-  width:100%;
+  width: 100%;
 }
-.postHeader{
-  width:100vw;
+.postHeader {
+  width: 100vw;
 }
 
-.imgLink p{
+.imgLink p {
   display: flex;
   flex-direction: column;
   align-items: center;
-
 }
 
-.imgLink{
+.imgLink {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: left;
   margin-left: 5px;
-  width:100vw;
+  width: 100vw;
 }
 
-@media(max-width:1300px){
-  .information{
+.fieldsMissingValidCreds {
+  display: flex;
+  width: 100vw;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.fieldsMissingValidCredsSub{
+  width: 200px;
+  height: 200px;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #f8d7da;
+}
+
+
+@media (max-width: 1300px) {
+  .information {
     padding-bottom: 20px;
-   
-    
   }
-  .container{
+  .container {
     resize: vertical;
   }
- 
 }

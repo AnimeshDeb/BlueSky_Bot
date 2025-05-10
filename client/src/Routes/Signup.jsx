@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/signup.css';
 import { Link } from 'react-router-dom';
 import successImg from '../images/success.jpg';
-import FooterSignup from '../Components/footerSignup';
 function Signup() {
   const apiUrl=import.meta.env.VITE_URL
   const navigate = useNavigate();

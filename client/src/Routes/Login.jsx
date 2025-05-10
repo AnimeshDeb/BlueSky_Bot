@@ -92,7 +92,7 @@ function Login() {
             <div className={loginStyles.login_header}>
               <h1>Login</h1>
               <p>
-                Don't have an account? <Link to="/signup">Sign Up</Link>
+                Do not have an account? <Link to="/signup">Sign Up</Link>
               </p>
             </div>
             <div className={loginStyles.email_password}>
